@@ -1,12 +1,14 @@
 /*
-	Core Modules
+	Core Module Dependencies
  */
+var fs = require('fs');
 var express = require('express');
-var path = require('path');
-var logger = require('morgan');
-var cookieParser = require('cookie-parser');
-var bodyParser = require('body-parser');
 var mongoose = require('mongoose');
+
+/*
+ Application Setup
+ */
+var app = express();
 
 /*
 	Configuration variables
@@ -15,7 +17,6 @@ var dbName = 'DummyApi';
 var dbConnectionString = 'mongodb://localhost:27017/' + dbName;
 
 var serverPort = 3000;
-
 
 /*
 	Database connection
@@ -28,44 +29,21 @@ mongoose.connect(dbConnectionString, function(err) {
 });
 
 /*
-	Route Modules
+	Bootstrap models
  */
-var routes = require('./routes/index');
-var users = require('./routes/users');
-
-/*
-	Application setup
- */
-var app = express();
-
-app.use(logger('dev'));
-app.use(bodyParser.json());
-app.use(bodyParser.urlencoded({ extended: false }));
-app.use(cookieParser());
-
-/*
-	Application routing
- */
-app.use('/', routes);
-app.use('/users', users);
-
-/*
-	Error handling
- */
-
-// catch 404 and forward to error handler
-app.use(function(req, res, next) {
-	var err = new Error('Not Found');
-	err.status = 404;
-	next(err);
+fs.readdirSync(__dirname + '/models').forEach(function (file) {
+	if (~file.indexOf('.js')) require(__dirname + '/models/' + file);
 });
 
-// catch other errors
-app.use(function(err, req, res, next) {
-	var error = new Error(err.message);
-	error.status = err.status || 500;
-	next(err);
-});
+/*
+	Bootstrap Application Settings
+ */
+require('./config/express')(app);
+
+/*
+	Bootstrap Routes
+ */
+require('./routes')(app);
 
 app.listen(serverPort, function() {
 	console.log('Express server listening on port: ', serverPort);

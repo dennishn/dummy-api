@@ -1,0 +1,159 @@
+{
+	"id": "b954d82c-1de4-6b71-18c7-2d110a1fdfb8",
+	"name": "Dummy Api",
+	"description": "",
+	"order": [],
+	"folders": [
+		{
+			"id": "35fec07c-ac22-7790-ef3b-0e3e54754c31",
+			"name": "Posts",
+			"description": "",
+			"write": true,
+			"order": [
+				"974651e0-97de-0bea-4454-575f979e71ed",
+				"01f78a62-42a6-2d66-782a-2a89dded3589",
+				"cffe12b4-7a91-5573-4b22-ac1e3d8fbccc",
+				"e7c170ff-8754-3d2e-02ff-1467ef157ea2",
+				"d1be3aa8-5de4-c01b-076e-7a1eaeefa64a"
+			],
+			"collection_name": "Dummy Api",
+			"collection_owner": "13799",
+			"collection_id": "b954d82c-1de4-6b71-18c7-2d110a1fdfb8",
+			"collection": "b954d82c-1de4-6b71-18c7-2d110a1fdfb8",
+			"owner": "13799",
+			"collectionId": "b954d82c-1de4-6b71-18c7-2d110a1fdfb8"
+		}
+	],
+	"timestamp": 1428503206586,
+	"synced": false,
+	"owner": "13799",
+	"sharedWithTeam": false,
+	"subscribed": false,
+	"remoteLink": "",
+	"public": false,
+	"write": true,
+	"requests": [
+		{
+			"id": "01f78a62-42a6-2d66-782a-2a89dded3589",
+			"headers": "X-Authorization: cr\n",
+			"url": "http://localhost:3000/api/posts/:id",
+			"preRequestScript": "",
+			"pathVariables": {
+				"id": ""
+			},
+			"method": "GET",
+			"data": [],
+			"dataMode": "params",
+			"version": 2,
+			"tests": "",
+			"currentHelper": "normal",
+			"helperAttributes": {},
+			"time": 1428503950165,
+			"name": "getOne",
+			"description": "Gets a single post",
+			"collectionId": "b954d82c-1de4-6b71-18c7-2d110a1fdfb8",
+			"responses": [],
+			"synced": false
+		},
+		{
+			"id": "974651e0-97de-0bea-4454-575f979e71ed",
+			"headers": "X-Authorization: cr\n",
+			"url": "http://localhost:3000/api/posts",
+			"pathVariables": {},
+			"preRequestScript": "",
+			"method": "GET",
+			"collectionId": "b954d82c-1de4-6b71-18c7-2d110a1fdfb8",
+			"data": [],
+			"dataMode": "params",
+			"name": "getAll",
+			"description": "Gets a list of all posts",
+			"descriptionFormat": "html",
+			"time": 1428503249524,
+			"version": 2,
+			"responses": [],
+			"tests": "",
+			"currentHelper": "normal",
+			"helperAttributes": {},
+			"folder": "35fec07c-ac22-7790-ef3b-0e3e54754c31",
+			"synced": false
+		},
+		{
+			"id": "cffe12b4-7a91-5573-4b22-ac1e3d8fbccc",
+			"headers": "X-Authorization: cr\n",
+			"url": "http://localhost:3000/api/posts",
+			"preRequestScript": "",
+			"pathVariables": {},
+			"method": "POST",
+			"data": [
+				{
+					"key": "title",
+					"value": "My Title",
+					"type": "text",
+					"enabled": true
+				}
+			],
+			"dataMode": "urlencoded",
+			"version": 2,
+			"tests": "",
+			"currentHelper": "normal",
+			"helperAttributes": {},
+			"time": 1428503287323,
+			"name": "create",
+			"description": "Creates a new post",
+			"collectionId": "b954d82c-1de4-6b71-18c7-2d110a1fdfb8",
+			"responses": [],
+			"synced": false
+		},
+		{
+			"id": "d1be3aa8-5de4-c01b-076e-7a1eaeefa64a",
+			"headers": "X-Authorization: cr\n",
+			"url": "http://localhost:3000/api/posts/:id",
+			"preRequestScript": "",
+			"pathVariables": {
+				"id": ""
+			},
+			"method": "DELETE",
+			"data": [],
+			"dataMode": "urlencoded",
+			"version": 2,
+			"tests": "",
+			"currentHelper": "normal",
+			"helperAttributes": {},
+			"time": 1428504308115,
+			"name": "delete",
+			"description": "Removes a single post",
+			"collectionId": "b954d82c-1de4-6b71-18c7-2d110a1fdfb8",
+			"responses": [],
+			"synced": false
+		},
+		{
+			"id": "e7c170ff-8754-3d2e-02ff-1467ef157ea2",
+			"headers": "X-Authorization: cr\n",
+			"url": "http://localhost:3000/api/posts/:id",
+			"preRequestScript": "",
+			"pathVariables": {
+				"id": ""
+			},
+			"method": "PUT",
+			"data": [
+				{
+					"key": "title",
+					"value": "My Updated Title",
+					"type": "text",
+					"enabled": true
+				}
+			],
+			"dataMode": "urlencoded",
+			"version": 2,
+			"tests": "",
+			"currentHelper": "normal",
+			"helperAttributes": {},
+			"time": 1428504110742,
+			"name": "update",
+			"description": "Updates all fields of a single post",
+			"collectionId": "b954d82c-1de4-6b71-18c7-2d110a1fdfb8",
+			"responses": [],
+			"synced": false
+		}
+	]
+}

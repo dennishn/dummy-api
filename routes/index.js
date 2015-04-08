@@ -1,9 +1,27 @@
-var express = require('express');
-var router = express.Router();
+/*
+ 	Module Dependencies
+ */
+var fs = require('fs');
 
-/* GET home page. */
-router.get('/', function(req, res, next) {
-  res.render('index', { title: 'Express' });
-});
+/*
+	Expose Module
+ */
+module.exports = function (app) {
 
-module.exports = router;
+	/*
+	 	Bootstrap routes
+	 */
+
+	fs.readdirSync(__dirname).forEach(function(file) {
+
+		if (file === 'index.js') {
+			return;
+		}
+
+		var name = file.substr(0, file.indexOf('.'));
+
+		require('./' + name)(app);
+
+	});
+
+};
