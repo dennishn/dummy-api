@@ -5,6 +5,7 @@ var express = require('express');
 var router 	= express.Router();
 
 var Post = require('../models/post');
+var Comment = require('../models/comment');
 
 module.exports = function(app) {
 
@@ -93,6 +94,38 @@ module.exports = function(app) {
 
 				res.json({
 					message: 'Post deleted'
+				});
+
+			});
+
+		});
+
+	router.route('/posts/:postId/comments')
+		.post(function(req, res) {
+
+			var data = req.body;
+
+			var comment = new Comment({
+				content: data.content
+			});
+
+
+			Post.findById(req.params.postId, function(err, post) {
+
+				if(err) {
+					res.send(err);
+				}
+
+				post.comments.push(comment);
+
+				post.save(function(err) {
+
+					if(err) {
+						res.send(err);
+					}
+
+					res.json(comment);
+
 				});
 
 			});
