@@ -109,7 +109,6 @@ module.exports = function(app) {
 				content: data.content
 			});
 
-
 			Post.findById(req.params.postId, function(err, post) {
 
 				if(err) {
