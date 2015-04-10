@@ -51,21 +51,6 @@ module.exports = function(app) {
 		});
 
 	});
-	router.param('comment', function(req, res, next, id) {
-
-		var query = Comment.findById(id);
-
-		query.exec(function(err, comment) {
-			if(err) {return next(err);}
-
-			// 404ify?
-			if(!comment) {return next(new Error('Post not found'));}
-
-			req.comment = comment;
-			return next();
-		});
-
-	});
 
 	/*
 	 	Routes that ends in /posts
@@ -184,45 +169,7 @@ module.exports = function(app) {
 
 		});
 
-	// Routes that ends in /comments/:id
-	// get 1, update 1, delete 1
-	router.route('/comments/:comment')
-		.get(function(req, res, next) {
 
-			// Since the Comment is attached to the request using the registered
-			// route parameter, there is no need to look it up here.
-
-			// Return the attached comment
-			res.json(req.comment);
-
-		})
-		.put(function(req, res, next) {
-
-			// There is no simple way in Mongoose to extend one object into another,
-			// Stackoverflow had a nice answer on how to handle this.
-			// Code is in the root folder under utils.js
-			utils.updateDocument(req.comment, Comment, req.body);
-
-			// Save the updated Comment and return it
-			req.comment.save(function(err, comment) {
-				if(err) { return next(err); }
-
-				res.json(comment);
-			});
-
-		})
-		.delete(function(req, res, next) {
-
-			// Delete the Comment and return an empty response (200 OK)
-			req.comment.remove(function(err){
-
-				if(err) { return next(err); }
-
-				res.send('');
-
-			});
-
-		});
 
 	// Register router
 	app.use('/api', router);
