@@ -4,124 +4,177 @@
 var express = require('express');
 var router 	= express.Router();
 
+var utils = require('../utils');
+
 var Post = require('../models/post');
 var Comment = require('../models/comment');
 
 module.exports = function(app) {
 
-	// Routes that ends in /posts
+	/*
+		Order of HTTP METHODS:
+		- get
+		- post
+		- put
+		- delete
+
+		Order of URIs:
+		- /foo
+		- /foo/:id
+		- /foo/:id/bar
+		- /foo/:id/bar/:id
+
+		- /bar
+		- /bar/:id
+		- /bar/:id/baz
+		- /bar/:id/baz/:id
+
+		etc.
+	 */
+
+	/*
+		DRY Principles:
+		Register route parameters to always return the corrensponding objects
+	 */
+	router.param('post', function(req, res, next, id) {
+
+		var query = Post.findById(id);
+
+		query.exec(function(err, post) {
+			if(err) {return next(err);}
+
+			// 404ify?
+			if(!post) {return next(new Error('Post not found'));}
+
+			req.post = post;
+			return next();
+		});
+
+	});
+	router.param('comment', function(req, res, next, id) {
+
+		var query = Comment.findById(id);
+
+		query.exec(function(err, comment) {
+			if(err) {return next(err);}
+
+			// 404ify?
+			if(!comment) {return next(new Error('Post not found'));}
+
+			req.comment = comment;
+			return next();
+		});
+
+	});
+
+	/*
+	 	Routes that ends in /posts
+	 */
 	router.route('/posts')
-		.post(function(req,res) {
+		.get(function(req, res, next) {
 
-			var data = req.body;
-
-			var post = new Post({
-				title: data.title
-			});
-
-			post.save(function(err) {
-
-				if(err) {
-					res.send(err);
-				}
-
-				res.json(post);
-
-			});
-
-		})
-		.get(function(req, res) {
-
+			// Find all Posts and return them
 			Post.find(function(err, posts) {
-
-				if(err) {
-					res.send(err);
-				}
+				if(err) { return next(err); }
 
 				res.json(posts);
+			});
 
+		})
+		.post(function(req, res, next) {
+
+			// Create a new Post based on the requested body data
+			var post = new Post(req.body);
+
+			// Save the new Post and return it
+			post.save(function(err, post) {
+				if(err) { return next(err); }
+
+				res.json(post);
 			});
 
 		});
 
-	// Routes that ends in /posts/:id
-	router.route('/posts/:postId')
-		.get(function(req, res) {
+	/*
+	 	Routes that ends in /posts/:id
+	 */
+	router.route('/posts/:post')
+		.get(function(req, res, next) {
 
-			Post.findById(req.params.postId, function(err, post) {
+			// Since the Post is attached to the request using the registered
+			// route parameter, there is no need to look it up here.
 
-				if(err) {
-					res.send(err);
-				}
+			// Populate the Post document with it's registered Comments and return it
+			req.post.populate('comments', function(err, post) {
+
+				if(err) { return next(err); }
 
 				res.json(post);
 
 			});
 
 		})
-		.put(function(req, res) {
+		.put(function(req, res, next) {
 
-			Post.findById(req.params.postId, function(err, post) {
+			// Update the Post's modified date field
+			req.body.modified = Date.now();
 
-				if(err) {
-					res.send(err);
-				}
+			// There is no simple way in Mongoose to extend one object into another,
+			// Stackoverflow had a nice answer on how to handle this.
+			// Code is in the root folder under utils.js
+			utils.updateDocument(req.post, Post, req.body);
 
-				post.title = req.body.title;
+			// Save the updated Post and return it
+			req.post.save(function(err, post) {
+				if(err) { return next(err); }
 
-				post.save(function(err) {
-
-					if(err) {
-						res.send(err);
-					}
-
-					res.json(post);
-
-				});
-
+				res.json(post);
 			});
-
 		})
-		.delete(function(req, res) {
+		.delete(function(req, res, next) {
 
-			Post.remove({
-				_id: req.params.postId
-			}, function(err, post) {
+			// Delete the Post and return an empty response (200 OK)
+			req.post.remove(function(err){
 
-				if(err) {
-					res.send(err);
-				}
+				if(err) { return next(err); }
 
-				res.json({
-					message: 'Post deleted'
-				});
+				res.send('');
 
 			});
 
 		});
 
-	router.route('/posts/:postId/comments')
-		.post(function(req, res) {
+	/*
+	 	Routes that ends in /posts/:id/comments
+	 */
+	router.route('/posts/:post/comments')
+		.get(function(req, res, next) {
 
-			var data = req.body;
+			// Find all comments with the Post id and return them
+			Comment.find({post: req.post._id}, function(err, comments) {
 
-			var comment = new Comment({
-				content: data.content
+				if(err) { return next(err); }
+
+				res.json(comments);
+
 			});
 
-			Post.findById(req.params.postId, function(err, post) {
+		})
+		.post(function(req, res, next) {
 
-				if(err) {
-					res.send(err);
-				}
+			var comment = new Comment(req.body);
 
-				post.comments.push(comment);
+			comment.post = req.post;
 
-				post.save(function(err) {
+			comment.save(function(err, comment) {
 
-					if(err) {
-						res.send(err);
-					}
+				if(err) { return next(err); }
+
+				req.post.comments.push(comment);
+
+				req.post.save(function(err, post) {
+
+					if(err) { return next(err); }
 
 					res.json(comment);
 
@@ -131,5 +184,46 @@ module.exports = function(app) {
 
 		});
 
+	// Routes that ends in /comments/:id
+	// get 1, update 1, delete 1
+	router.route('/comments/:comment')
+		.get(function(req, res, next) {
+
+			// Since the Comment is attached to the request using the registered
+			// route parameter, there is no need to look it up here.
+
+			// Return the attached comment
+			res.json(req.comment);
+
+		})
+		.put(function(req, res, next) {
+
+			// There is no simple way in Mongoose to extend one object into another,
+			// Stackoverflow had a nice answer on how to handle this.
+			// Code is in the root folder under utils.js
+			utils.updateDocument(req.comment, Comment, req.body);
+
+			// Save the updated Comment and return it
+			req.comment.save(function(err, comment) {
+				if(err) { return next(err); }
+
+				res.json(comment);
+			});
+
+		})
+		.delete(function(req, res, next) {
+
+			// Delete the Comment and return an empty response (200 OK)
+			req.comment.remove(function(err){
+
+				if(err) { return next(err); }
+
+				res.send('');
+
+			});
+
+		});
+
+	// Register router
 	app.use('/api', router);
 };
