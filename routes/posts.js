@@ -169,8 +169,6 @@ module.exports = function(app) {
 
 		});
 
-
-
 	// Register router
 	app.use('/api', router);
 };
