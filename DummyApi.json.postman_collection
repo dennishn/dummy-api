@@ -17,10 +17,30 @@
 				"7c481d38-0041-e9f8-58a1-5b8cb68a447b"
 			],
 			"collection_name": "Dummy Api",
-			"collection_owner": "13799",
+			"collection_owner": 0,
 			"collection_id": "b954d82c-1de4-6b71-18c7-2d110a1fdfb8",
 			"collection": "b954d82c-1de4-6b71-18c7-2d110a1fdfb8",
-			"owner": "13799",
+			"owner": 0,
+			"collectionId": "b954d82c-1de4-6b71-18c7-2d110a1fdfb8"
+		},
+		{
+			"id": "ae1473ec-874c-0a8c-f561-f8948b19df21",
+			"name": "Helpers",
+			"description": "",
+			"write": true,
+			"order": [
+				"c2fcb2a5-168a-9c72-6b2f-133cc9455ef0",
+				"0c72c25f-823e-201d-de4b-0f0fcf9a5450",
+				"fdfa9c22-a87b-31ce-e8de-d11761f27b82",
+				"93f6059b-f34f-277c-2238-0eed41408d9b",
+				"5eb3e1fb-d5e7-516d-05af-6199c74e125d",
+				"f70196bc-70bc-0240-9684-c556785c15d2"
+			],
+			"collection_name": "Dummy Api",
+			"collection_owner": 0,
+			"collection_id": "b954d82c-1de4-6b71-18c7-2d110a1fdfb8",
+			"collection": "b954d82c-1de4-6b71-18c7-2d110a1fdfb8",
+			"owner": 0,
 			"collectionId": "b954d82c-1de4-6b71-18c7-2d110a1fdfb8"
 		},
 		{
@@ -36,16 +56,16 @@
 				"d1be3aa8-5de4-c01b-076e-7a1eaeefa64a"
 			],
 			"collection_name": "Dummy Api",
-			"collection_owner": "13799",
+			"collection_owner": 0,
 			"collection_id": "b954d82c-1de4-6b71-18c7-2d110a1fdfb8",
 			"collection": "b954d82c-1de4-6b71-18c7-2d110a1fdfb8",
-			"owner": "13799",
+			"owner": 0,
 			"collectionId": "b954d82c-1de4-6b71-18c7-2d110a1fdfb8"
 		}
 	],
 	"timestamp": 1428503206586,
 	"synced": false,
-	"owner": "13799",
+	"owner": 0,
 	"sharedWithTeam": false,
 	"subscribed": false,
 	"remoteLink": "",
@@ -91,6 +111,50 @@
 			"description": "Gets a single post",
 			"collectionId": "b954d82c-1de4-6b71-18c7-2d110a1fdfb8",
 			"responses": [],
+			"synced": false,
+			"owner": 0,
+			"folder": "35fec07c-ac22-7790-ef3b-0e3e54754c31"
+		},
+		{
+			"id": "0c72c25f-823e-201d-de4b-0f0fcf9a5450",
+			"headers": "",
+			"url": "http://localhost:3000/api/helpers/posts/one",
+			"preRequestScript": "",
+			"pathVariables": {},
+			"method": "POST",
+			"data": [],
+			"dataMode": "params",
+			"version": 2,
+			"tests": "",
+			"currentHelper": "normal",
+			"helperAttributes": {},
+			"time": 1428839942744,
+			"name": "Post - createOne",
+			"description": "Creates a single post based on dummy data.",
+			"collectionId": "b954d82c-1de4-6b71-18c7-2d110a1fdfb8",
+			"responses": [],
+			"synced": false
+		},
+		{
+			"id": "5eb3e1fb-d5e7-516d-05af-6199c74e125d",
+			"headers": "",
+			"url": "http://localhost:3000/api/helpers/posts/many/:count/comments",
+			"preRequestScript": "",
+			"pathVariables": {
+				"count": ""
+			},
+			"method": "POST",
+			"data": [],
+			"dataMode": "params",
+			"version": 2,
+			"tests": "",
+			"currentHelper": "normal",
+			"helperAttributes": {},
+			"time": 1428840606868,
+			"name": "Post - createMany (comments)",
+			"description": "Creates a defined number of posts with random number of comments based on dummy data.",
+			"collectionId": "b954d82c-1de4-6b71-18c7-2d110a1fdfb8",
+			"responses": [],
 			"synced": false
 		},
 		{
@@ -113,6 +177,30 @@
 			"description": "Removes a single post",
 			"collectionId": "b954d82c-1de4-6b71-18c7-2d110a1fdfb8",
 			"responses": [],
+			"synced": false,
+			"owner": 0,
+			"folder": "a15c9164-fd5c-2d87-bfb6-30ba00aad274"
+		},
+		{
+			"id": "93f6059b-f34f-277c-2238-0eed41408d9b",
+			"headers": "",
+			"url": "http://localhost:3000/api/helpers/posts/many/:count",
+			"preRequestScript": "",
+			"pathVariables": {
+				"count": ""
+			},
+			"method": "POST",
+			"data": [],
+			"dataMode": "params",
+			"version": 2,
+			"tests": "",
+			"currentHelper": "normal",
+			"helperAttributes": {},
+			"time": 1428840340142,
+			"name": "Post - createMany",
+			"description": "Creates a defined number of posts based on dummy data.",
+			"collectionId": "b954d82c-1de4-6b71-18c7-2d110a1fdfb8",
+			"responses": [],
 			"synced": false
 		},
 		{
@@ -122,34 +210,35 @@
 			"preRequestScript": "",
 			"pathVariables": {},
 			"method": "GET",
-			"data": [
-				{
-					"key": "accommodation_id",
-					"value": "21",
-					"type": "text",
-					"enabled": true
-				},
-				{
-					"key": "name",
-					"value": "Loft",
-					"type": "text",
-					"enabled": true
-				},
-				{
-					"key": "size",
-					"value": "1",
-					"type": "text",
-					"enabled": true
-				}
-			],
+			"data": [],
 			"dataMode": "params",
 			"version": 2,
 			"tests": "",
 			"currentHelper": "normal",
 			"helperAttributes": {},
-			"time": 1428664386783,
+			"time": 1428780387943,
 			"name": "getAll",
 			"description": "Gets a list of all posts",
+			"collectionId": "b954d82c-1de4-6b71-18c7-2d110a1fdfb8",
+			"responses": [],
+			"synced": false
+		},
+		{
+			"id": "c2fcb2a5-168a-9c72-6b2f-133cc9455ef0",
+			"headers": "",
+			"url": "http://localhost:3000/api/helpers/posts/one",
+			"preRequestScript": "",
+			"pathVariables": {},
+			"method": "GET",
+			"data": [],
+			"dataMode": "params",
+			"version": 2,
+			"tests": "",
+			"currentHelper": "normal",
+			"helperAttributes": {},
+			"time": 1428839937323,
+			"name": "Post - getOne",
+			"description": "Gets a single post based on dummy data.",
 			"collectionId": "b954d82c-1de4-6b71-18c7-2d110a1fdfb8",
 			"responses": [],
 			"synced": false
@@ -185,7 +274,9 @@
 			"description": "Creates a new post",
 			"collectionId": "b954d82c-1de4-6b71-18c7-2d110a1fdfb8",
 			"responses": [],
-			"synced": false
+			"synced": false,
+			"owner": 0,
+			"folder": "35fec07c-ac22-7790-ef3b-0e3e54754c31"
 		},
 		{
 			"id": "d1be3aa8-5de4-c01b-076e-7a1eaeefa64a",
@@ -207,7 +298,9 @@
 			"description": "Removes a single post",
 			"collectionId": "b954d82c-1de4-6b71-18c7-2d110a1fdfb8",
 			"responses": [],
-			"synced": false
+			"synced": false,
+			"owner": 0,
+			"folder": "35fec07c-ac22-7790-ef3b-0e3e54754c31"
 		},
 		{
 			"id": "e41cafca-038d-44f3-1364-bff01e754914",
@@ -234,7 +327,9 @@
 			"description": "Creates a new post",
 			"collectionId": "b954d82c-1de4-6b71-18c7-2d110a1fdfb8",
 			"responses": [],
-			"synced": false
+			"synced": false,
+			"owner": 0,
+			"folder": "a15c9164-fd5c-2d87-bfb6-30ba00aad274"
 		},
 		{
 			"id": "e6f96918-f7db-7f03-a97a-515d929616d6",
@@ -263,7 +358,9 @@
 			"description": "Updates all fields of a single post",
 			"collectionId": "b954d82c-1de4-6b71-18c7-2d110a1fdfb8",
 			"responses": [],
-			"synced": false
+			"synced": false,
+			"owner": 0,
+			"folder": "a15c9164-fd5c-2d87-bfb6-30ba00aad274"
 		},
 		{
 			"id": "e7c170ff-8754-3d2e-02ff-1467ef157ea2",
@@ -298,7 +395,9 @@
 			"description": "Updates all fields of a single post",
 			"collectionId": "b954d82c-1de4-6b71-18c7-2d110a1fdfb8",
 			"responses": [],
-			"synced": false
+			"synced": false,
+			"owner": 0,
+			"folder": "35fec07c-ac22-7790-ef3b-0e3e54754c31"
 		},
 		{
 			"id": "f14de068-1f12-8379-9c8a-2377f2330dab",
@@ -318,6 +417,28 @@
 			"time": 1428658871786,
 			"name": "getOne",
 			"description": "Gets a single post",
+			"collectionId": "b954d82c-1de4-6b71-18c7-2d110a1fdfb8",
+			"responses": [],
+			"synced": false,
+			"owner": 0,
+			"folder": "a15c9164-fd5c-2d87-bfb6-30ba00aad274"
+		},
+		{
+			"id": "f70196bc-70bc-0240-9684-c556785c15d2",
+			"headers": "",
+			"url": "http://localhost:3000/api/helpers/comments/one",
+			"preRequestScript": "",
+			"pathVariables": {},
+			"method": "GET",
+			"data": [],
+			"dataMode": "params",
+			"version": 2,
+			"tests": "",
+			"currentHelper": "normal",
+			"helperAttributes": {},
+			"time": 1428840252378,
+			"name": "Comment - getOne",
+			"description": "Gets a single comment based on dummy data.",
 			"collectionId": "b954d82c-1de4-6b71-18c7-2d110a1fdfb8",
 			"responses": [],
 			"synced": false
@@ -340,6 +461,28 @@
 			"time": 1428658635088,
 			"name": "getAll",
 			"description": "Gets a list of all posts",
+			"collectionId": "b954d82c-1de4-6b71-18c7-2d110a1fdfb8",
+			"responses": [],
+			"synced": false,
+			"owner": 0,
+			"folder": "a15c9164-fd5c-2d87-bfb6-30ba00aad274"
+		},
+		{
+			"id": "fdfa9c22-a87b-31ce-e8de-d11761f27b82",
+			"headers": "",
+			"url": "http://localhost:3000/api/helpers/posts/one/comments",
+			"preRequestScript": "",
+			"pathVariables": {},
+			"method": "POST",
+			"data": [],
+			"dataMode": "params",
+			"version": 2,
+			"tests": "",
+			"currentHelper": "normal",
+			"helperAttributes": {},
+			"time": 1428839947003,
+			"name": "Post - createOne (comments)",
+			"description": "Creates a single post and a random number of comments based on dummy data.",
 			"collectionId": "b954d82c-1de4-6b71-18c7-2d110a1fdfb8",
 			"responses": [],
 			"synced": false
