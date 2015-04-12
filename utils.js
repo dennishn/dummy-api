@@ -1,7 +1,6 @@
 /*
 	Public Methods
  */
-
 exports.updateDocument = function(document, SchemaTarget, data) {
 
 	for(var field in SchemaTarget.schema.paths) {

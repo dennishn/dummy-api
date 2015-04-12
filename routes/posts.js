@@ -111,9 +111,7 @@ module.exports = function(app) {
 
 			// Save the updated Post and return it
 			req.post.save(function(err, post) {
-				if(err) {
-					console.log(err);
-				}
+				if(err) { return next(err); }
 
 				res.json(post);
 			});

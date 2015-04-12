@@ -3,6 +3,9 @@ var nodeUtil = require('util');
 
 var exports = module.exports = {};
 
+/*
+ Public Methods
+ */
 exports.isInterceptable = function(response) {
 
 	if(!response) {
@@ -34,6 +37,9 @@ exports.transformBody = function(response) {
 
 };
 
+/*
+ Private Methods
+ */
 function _isArray(array) {
 	return nodeUtil.isArray(array);
 }
@@ -74,28 +80,3 @@ function _wrapObject(object) {
 	return response;
 
 }
-
-//function _wrappedResponse
-/*function wrap(response){
-	if(_.isArray(response)){
-		return new WrappedResponseList(response);
-	}else if(_.isObject(response)){
-		return new WrappedResponseObject(response);
-	}
-}
-
-function _wrappedResponseObject(response){
-	this.id = uuid.v1();
-	this.data = response;
-	this.version = 'v1';
-	this.date = new Date();
-}
-
-function _wrappedResponseList(response){
-	this.length = response.length;
-	this.data = response;
-	this.version = 'v1';
-	this.date = new Date();
-}
-
-module.exports = wrap;*/
