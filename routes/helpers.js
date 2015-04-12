@@ -2,18 +2,21 @@
 /*
  Module Dependencies
  */
-var express = require('express');
-var router 	= express.Router();
+var express 	= require('express');
+var router 		= express.Router();
 
-var faker = require('faker');
+var faker 		= require('faker');
 
-var Post = require('../models/post');
-var Comment = require('../models/comment');
+var utils		= require('../utils');
+
+var Post 		= require('../models/post');
+var Comment 	= require('../models/comment');
+var Category	= require('../models/category');
 
 module.exports = function(app) {
 
 	router.route('/helpers/posts/one')
-		.get(function(req, res, next) {
+		.get(function(req, res) {
 
 			var post = _generatePost(true);
 
@@ -106,13 +109,13 @@ module.exports = function(app) {
 		});
 
 	router.route('/helpers/comments/one')
-		.get(function(req, res, next) {
+		.get(function(req, res) {
 
 			var comment = _generateComment(null, true);
 
 			res.json(comment);
 
-		})
+		});
 
 	app.use('/api', router);
 
@@ -143,6 +146,21 @@ function _generatePost(raw) {
 	post.body = faker.lorem.paragraphs();
 	post.created = past;
 	post.modified = modifiedDate;
+	post.categories = [];
+
+	// Populate with a few Categories
+	var categoryCount = utils.randomIntFromInterval(0, 3);
+	for(var i = 0; i < categoryCount; i++) {
+
+		try {
+			var cat = _generateCategory(raw);
+			if(cat) {
+				post.categories.push(_generateCategory(raw));
+			}
+		} catch(e) {
+
+		}
+	}
 
 	return post;
 }
@@ -164,5 +182,33 @@ function _generateComment(post, raw) {
 	}
 
 	return comment;
+
+}
+
+function _generateCategory(raw) {
+
+	var categories = [
+		'Technology',
+		'Politics',
+		'Finance',
+		'Art',
+		'Sports',
+		'Entertainment',
+		'Music'
+	];
+
+	var categoryIndex = utils.randomIntFromInterval(0, categories.length-1);
+	var selectedCatergory = categories[categoryIndex];
+
+	var category;
+
+	if(raw) {
+		category = selectedCatergory
+	} else {
+		category = new Category({_id: selectedCatergory});
+		category.save();
+	}
+
+	return category;
 
 }

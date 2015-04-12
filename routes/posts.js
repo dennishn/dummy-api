@@ -1,3 +1,4 @@
+"use strict";
 /*
  Module Dependencies
  */
@@ -58,12 +59,26 @@ module.exports = function(app) {
 	router.route('/posts')
 		.get(function(req, res, next) {
 
-			// Find all Posts and return them
-			Post.find(function(err, posts) {
-				if(err) { return next(err); }
+			console.log(req.query);
 
-				res.json(posts);
-			});
+			var query;
+
+			if(req.query.categories) {
+
+				if(req.query.categories.length > 0) {
+					query = {
+						categories: req.query.categories
+					}
+				}
+
+			}
+			
+			// Find all Posts and return them
+			Post.find(query)
+				.exec(function(err, posts) {
+					if(err) { return next(err); }
+					res.json(posts);
+				});
 
 		})
 		.post(function(req, res, next) {

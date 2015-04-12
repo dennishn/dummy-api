@@ -2,6 +2,7 @@ var mongoose	= require('mongoose');
 var Schema		= mongoose.Schema;
 
 var Comment		= require('./comment');
+var Category	= require('./category');
 
 /*
 	Schema Definition
@@ -22,6 +23,9 @@ var PostSchema   = new Schema({
 		type: Date,
 		default: Date.now
 	},
+	categories: [{
+		type: String
+	}],
 	comments: [{
 		type: Schema.Types.ObjectId,
 		ref: 'Comment'
