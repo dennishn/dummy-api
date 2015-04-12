@@ -12,7 +12,14 @@ var Comment = require('../models/comment');
 
 module.exports = function(app) {
 
-	router.route('/helpers/posts/add-one')
+	router.route('/helpers/posts/one')
+		.get(function(req, res, next) {
+
+			var post = _generatePost(true);
+
+			res.json(post);
+
+		})
 		.post(function(req, res, next) {
 
 			var post = _generatePost();
@@ -25,7 +32,7 @@ module.exports = function(app) {
 
 		});
 
-	router.route('/helpers/posts/add-one/comments')
+	router.route('/helpers/posts/one/comments')
 		.post(function(req, res, next) {
 
 			var post = _generatePost();
@@ -50,6 +57,63 @@ module.exports = function(app) {
 
 		});
 
+	router.route('/helpers/posts/many/:count')
+		.post(function(req, res, next) {
+
+			var postsToBeCreated = req.params.count;
+
+			for(var i = 0; i < postsToBeCreated; i++) {
+
+				var post = _generatePost();
+
+				post.save(function(err) {
+					if(err) { return next(err); }
+				});
+
+			}
+
+			res.send('');
+
+		});
+
+	router.route('/helpers/posts/many/:count/comments')
+		.post(function(req, res, next) {
+
+			var postsToBeCreated = req.params.count;
+
+			for(var i = 0; i < postsToBeCreated; i++) {
+
+				var post = _generatePost();
+
+				var commentsToBeCreated = Math.floor(Math.random() * 17);
+
+				for(var j = 0; j < commentsToBeCreated; j++) {
+
+					var comment = _generateComment(post);
+
+					comment.save();
+
+					post.comments.push(comment);
+
+				}
+
+				post.save(function(err) {
+					if(err) { return next(err); }
+				});
+
+			}
+			res.send('');
+		});
+
+	router.route('/helpers/comments/one')
+		.get(function(req, res, next) {
+
+			var comment = _generateComment(null, true);
+
+			res.json(comment);
+
+		})
+
 	app.use('/api', router);
 
 };
@@ -57,9 +121,15 @@ module.exports = function(app) {
 /*
 	Private Methods
  */
-function _generatePost() {
+function _generatePost(raw) {
 
-	var post = new Post();
+	var post;
+
+	if(raw) {
+		post = {};
+	} else {
+		post = new Post();
+	}
 
 	var past = new Date();
 	past.setMonth(past.getMonth() - 6);
@@ -77,12 +147,21 @@ function _generatePost() {
 	return post;
 }
 
-function _generateComment(post) {
+function _generateComment(post, raw) {
 
-	var comment = new Comment();
+	var comment;
+
+	if(raw) {
+		comment = {}
+	} else {
+		comment = new Comment();
+	}
 
 	comment.body = faker.lorem.sentences();
-	comment.post = post;
+
+	if(!raw) {
+		comment.post = post;
+	}
 
 	return comment;
 
