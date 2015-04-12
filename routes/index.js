@@ -3,6 +3,7 @@
  */
 var fs = require('fs');
 
+var express = require('express');
 /*
 	Expose Module
  */
@@ -11,7 +12,6 @@ module.exports = function (app) {
 	/*
 	 	Bootstrap routes
 	 */
-
 	fs.readdirSync(__dirname).forEach(function(file) {
 
 		if (file === 'index.js') {

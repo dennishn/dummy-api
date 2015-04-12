@@ -2,8 +2,12 @@
 	Core Module Dependencies
  */
 var fs = require('fs');
+
 var express = require('express');
 var mongoose = require('mongoose');
+var interceptor = require('express-interceptor');
+
+var nodesResponse = require('./wrappers/nodes.response');
 
 /*
  Application Setup
@@ -39,6 +43,35 @@ fs.readdirSync(__dirname + '/models').forEach(function (file) {
 	Bootstrap Application Settings
  */
 require('./config/express')(app);
+
+/*
+	Global Response interceptor
+ */
+var nodesInterceptor = interceptor(function(req, res){
+	return {
+		// Bypass this
+		isInterceptable: function(){
+			return true;
+		},
+		/*
+			If the response is an object or array - we transform the response
+			according to the Nodes API specs
+		 */
+		intercept: function(body, send) {
+			
+			// If the response is neither object or array, bypass intercepting
+			if(!nodesResponse.isInterceptable(body)) {
+				send(body);
+				return;
+			}
+
+			var transformedBody = nodesResponse.transformBody(body);
+
+			send(transformedBody);
+		}
+	};
+});
+app.use(nodesInterceptor);
 
 /*
 	Bootstrap Routes
