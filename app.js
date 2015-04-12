@@ -8,6 +8,7 @@ var mongoose = require('mongoose');
 var interceptor = require('express-interceptor');
 
 var nodesResponse = require('./wrappers/nodes.response');
+var nodesHeaders = require('./wrappers/nodes.headers.js');
 
 /*
  Application Setup
@@ -58,7 +59,10 @@ var nodesInterceptor = interceptor(function(req, res){
 			according to the Nodes API specs
 		 */
 		intercept: function(body, send) {
-			
+
+			nodesHeaders.setAccept(res);
+			nodesHeaders.setLanguage(res, 'en');
+
 			// If the response is neither object or array, bypass intercepting
 			if(!nodesResponse.isInterceptable(body)) {
 				send(body);

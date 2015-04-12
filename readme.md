@@ -2,6 +2,7 @@ Requirements:
 - nodeJS
 - npm
 - mongoDB
+- supervisor (npm install -g supervisor)
 
 - Clone the project
 - Create a branch
