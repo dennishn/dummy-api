@@ -34,7 +34,9 @@ var PostSchema   = new Schema({
 PostSchema.pre('remove', function(next) {
 
 	// When a Post is removed, we remove all the associated comments
-	Comment.remove({post: this._id}).exec();
+	if(this.comments.length > 0) {
+		Comment.remove({post: this._id}).exec();
+	}
 
 	next();
 

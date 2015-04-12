@@ -34,8 +34,8 @@ module.exports = function(app) {
 
 	/*
 		DRY Principles:
-		Register route parameters to always return the corrensponding objects
 	 */
+	// Register route parameters to always return the corrensponding objects
 	router.param('post', function(req, res, next, id) {
 
 		var query = Post.findById(id);
@@ -111,7 +111,9 @@ module.exports = function(app) {
 
 			// Save the updated Post and return it
 			req.post.save(function(err, post) {
-				if(err) { return next(err); }
+				if(err) {
+					console.log(err);
+				}
 
 				res.json(post);
 			});
@@ -146,6 +148,8 @@ module.exports = function(app) {
 
 		})
 		.post(function(req, res, next) {
+
+			// Dette kan gøres pænere, ved at rydde op i comment response obj
 
 			var comment = new Comment(req.body);
 
