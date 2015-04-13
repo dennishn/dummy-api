@@ -60,11 +60,15 @@ module.exports = function(app) {
 		.get(function(req, res, next) {
 
 			var query, sort, order;
+			var wherePath, searchableFields;
+			var searchQueryTitle, searchQueryCategories;
 
 			/*
 				Query Parameters:
 			 */
 			// Filters
+
+			// "custom query"
 			if(req.query.categories) {
 
 				query = {
@@ -72,7 +76,36 @@ module.exports = function(app) {
 				};
 
 			}
+			// search
+			if(req.query.search) {
+
+				wherePath = req.query.search;
+
+				searchableFields = ['categories', 'title'];
+
+				searchQueryTitle = [
+					{
+						'title': {
+							'$regex': req.query.search,
+							'$options': 'i'
+						}
+					}
+				];
+
+				searchQueryCategories = [
+					{
+						'categories': {
+							'$regex': req.query.search,
+							'$options': 'i'
+						}
+					}
+				]
+
+			}
+
 			// Sorting
+
+			// "custom" sort + order
 			if(req.query.order) {
 
 				sort = req.query.order;
@@ -88,12 +121,29 @@ module.exports = function(app) {
 			}
 			
 			// Find all Posts and return them
+
+			// If we are searching we need more advanced query flow
+			if(req.query.search) {
+
+				Post.find()
+					.or(searchQueryCategories)
+					.or(searchQueryTitle)
+					.sort(sort)
+					.exec(function(err, posts) {
+						console.log(posts)
+						if(err) { return next(err); }
+						res.json(posts);
+					});
+
+				return;
+			}
+
 			Post.find(query)
-				.sort(sort)
-				.exec(function(err, posts) {
-					if(err) { return next(err); }
-					res.json(posts);
-				});
+			.sort(sort)
+			.exec(function(err, posts) {
+				if(err) { return next(err); }
+				res.json(posts);
+			});
 
 		})
 		.post(function(req, res, next) {
