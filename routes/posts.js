@@ -1,4 +1,4 @@
-"use strict";
+'use strict';
 /*
  Module Dependencies
  */
@@ -59,22 +59,29 @@ module.exports = function(app) {
 	router.route('/posts')
 		.get(function(req, res, next) {
 
-			console.log(req.query);
+			var query, sort;
 
-			var query;
-
+			/*
+				Query Parameters:
+			 */
+			// Filters
 			if(req.query.categories) {
 
-				if(req.query.categories.length > 0) {
-					query = {
-						categories: req.query.categories
-					}
-				}
+				query = {
+					categories: req.query.categories
+				};
+
+			}
+			// Sorting
+			if(req.query.order) {
+
+				sort = req.query.order;
 
 			}
 			
 			// Find all Posts and return them
 			Post.find(query)
+				.sort(sort)
 				.exec(function(err, posts) {
 					if(err) { return next(err); }
 					res.json(posts);
@@ -162,7 +169,7 @@ module.exports = function(app) {
 		})
 		.post(function(req, res, next) {
 
-			// Dette kan gøres pænere, ved at rydde op i comment response obj
+			// Dette kan gï¿½res pï¿½nere, ved at rydde op i comment response obj
 
 			var comment = new Comment(req.body);
 
