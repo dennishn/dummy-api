@@ -59,7 +59,7 @@ module.exports = function(app) {
 	router.route('/posts')
 		.get(function(req, res, next) {
 
-			var query, sort;
+			var query, sort, order;
 
 			/*
 				Query Parameters:
@@ -76,6 +76,14 @@ module.exports = function(app) {
 			if(req.query.order) {
 
 				sort = req.query.order;
+
+				order = '';
+
+				if(req.query.direction) {
+					order = (req.query.direction.toLowerCase() === 'asc') ? '' : '-';
+				}
+
+				sort = order + sort;
 
 			}
 			
