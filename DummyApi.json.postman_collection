@@ -71,6 +71,7 @@
 	"remoteLink": "",
 	"public": false,
 	"write": true,
+	"hasRequests": true,
 	"requests": [
 		{
 			"id": "01f78a62-42a6-2d66-782a-2a89dded3589",
@@ -133,7 +134,9 @@
 			"description": "Creates a single post based on dummy data.",
 			"collectionId": "b954d82c-1de4-6b71-18c7-2d110a1fdfb8",
 			"responses": [],
-			"synced": false
+			"synced": false,
+			"owner": 0,
+			"folder": "ae1473ec-874c-0a8c-f561-f8948b19df21"
 		},
 		{
 			"id": "5eb3e1fb-d5e7-516d-05af-6199c74e125d",
@@ -155,7 +158,9 @@
 			"description": "Creates a defined number of posts with random number of comments based on dummy data.",
 			"collectionId": "b954d82c-1de4-6b71-18c7-2d110a1fdfb8",
 			"responses": [],
-			"synced": false
+			"synced": false,
+			"owner": 0,
+			"folder": "ae1473ec-874c-0a8c-f561-f8948b19df21"
 		},
 		{
 			"id": "7c481d38-0041-e9f8-58a1-5b8cb68a447b",
@@ -201,12 +206,14 @@
 			"description": "Creates a defined number of posts based on dummy data.",
 			"collectionId": "b954d82c-1de4-6b71-18c7-2d110a1fdfb8",
 			"responses": [],
-			"synced": false
+			"synced": false,
+			"owner": 0,
+			"folder": "ae1473ec-874c-0a8c-f561-f8948b19df21"
 		},
 		{
 			"id": "974651e0-97de-0bea-4454-575f979e71ed",
 			"headers": "",
-			"url": "http://localhost:3000/api/posts",
+			"url": "http://localhost:3000/api/posts?categories&order&direction&search",
 			"preRequestScript": "",
 			"pathVariables": {},
 			"method": "GET",
@@ -216,7 +223,7 @@
 			"tests": "",
 			"currentHelper": "normal",
 			"helperAttributes": {},
-			"time": 1428780387943,
+			"time": 1428947452686,
 			"name": "getAll",
 			"description": "Gets a list of all posts",
 			"collectionId": "b954d82c-1de4-6b71-18c7-2d110a1fdfb8",
@@ -241,7 +248,9 @@
 			"description": "Gets a single post based on dummy data.",
 			"collectionId": "b954d82c-1de4-6b71-18c7-2d110a1fdfb8",
 			"responses": [],
-			"synced": false
+			"synced": false,
+			"owner": 0,
+			"folder": "ae1473ec-874c-0a8c-f561-f8948b19df21"
 		},
 		{
 			"id": "cffe12b4-7a91-5573-4b22-ac1e3d8fbccc",
@@ -441,7 +450,9 @@
 			"description": "Gets a single comment based on dummy data.",
 			"collectionId": "b954d82c-1de4-6b71-18c7-2d110a1fdfb8",
 			"responses": [],
-			"synced": false
+			"synced": false,
+			"owner": 0,
+			"folder": "ae1473ec-874c-0a8c-f561-f8948b19df21"
 		},
 		{
 			"id": "fa8d3b99-b6ac-964d-d557-9ebb910b8065",
@@ -485,7 +496,9 @@
 			"description": "Creates a single post and a random number of comments based on dummy data.",
 			"collectionId": "b954d82c-1de4-6b71-18c7-2d110a1fdfb8",
 			"responses": [],
-			"synced": false
+			"synced": false,
+			"owner": 0,
+			"folder": "ae1473ec-874c-0a8c-f561-f8948b19df21"
 		}
 	]
 }
