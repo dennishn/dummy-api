@@ -14,7 +14,7 @@
 /**
  * Module dependencies.
  */
-var logger   = require('mm-node-logger')(module);
+//var logger   = require('mm-node-logger')(module);
 var mongoose = require('mongoose');
 var config = require('./config');
 
@@ -29,17 +29,17 @@ function createMongooseConnection(cb) {
 
     // when successfully connected
     mongoose.connection.on('connected', function () {
-        logger.info('Mongoose connected to ' + config.mongodb.dbURI);
+        console.info('Mongoose connected to ' + config.mongodb.dbURI);
     });
 
     // if the connection throws an error
     mongoose.connection.on('error', function (err) {
-        logger.error('Mongoose connection error: ' + err);
+        console.error('Mongoose connection error: ' + err);
     });
 
     // when the connection is disconnected
     mongoose.connection.on('disconnected', function () {
-        logger.info('Mongoose disconnected');
+        console.info('Mongoose disconnected');
     });
 
     // when the connection is open
@@ -50,7 +50,7 @@ function createMongooseConnection(cb) {
     // if the Node process ends, close the Mongoose connection
     process.on('SIGINT', function() {
         mongoose.connection.close(function () {
-            logger.info('Mongoose disconnected through app termination');
+            console.info('Mongoose disconnected through app termination');
             process.exit(0);
         });
     });

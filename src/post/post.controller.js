@@ -10,7 +10,7 @@
 /**
  * Module dependencies.
  */
-var logger = require('mm-node-logger')(module);
+//var logger = require('mm-node-logger')(module);
 var Post   = require('./post.model.js');
 
 /**
@@ -24,7 +24,7 @@ var Post   = require('./post.model.js');
 function findById(req, res) {
     return Post.findById(req.params.id, 'title body', function (err, post) {
         if (err) {
-            logger.error(err.message);
+            console.error(err.message);
             return res.status(400).send(err);
         } else {
             res.json(post);
@@ -43,7 +43,7 @@ function findById(req, res) {
 function findAll(req, res) {
     Post.find(function(err, users) {
         if (err) {
-            logger.error(err.message);
+            console.error(err.message);
             return res.status(400).send(err);
         } else {
             res.json(users);

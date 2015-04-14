@@ -11,7 +11,7 @@
  * Module dependencies.
  */
 var path   = require('path');
-var logger = require('mm-node-logger')(module);
+//var logger = require('mm-node-logger')(module);
 var Image  = require('./image.model.js');
 
 /**
@@ -25,7 +25,7 @@ var Image  = require('./image.model.js');
 function findByUser(req, res) {
     return Image.find({user: req.query.userId}, function (err, images) {
         if (err) {
-            logger.error(err.message);
+            console.error(err.message);
             return res.status(400).send(err);
         } else {
             return res.json(images);
@@ -49,7 +49,7 @@ function create(req, res) {
 
     image.save(function(err, image) {
         if (err) {
-            logger.error(err.message);
+            console.error(err.message);
             return res.status(400).send(err);
         } else {
             res.status(201).json(image);
@@ -67,7 +67,7 @@ function create(req, res) {
 function deleteImage(req, res) {
     Image.findByIdAndRemove(req.params.id, function(err) {
         if (err) {
-            logger.error(err.message);
+            console.error(err.message);
             return res.status(500).send(err);
         } else {
             res.sendStatus(204);

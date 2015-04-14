@@ -10,21 +10,42 @@
 /**
  * Module dependencies.
  */
-var mongoose = require('mongoose');
+var mongoose    = require('mongoose');
+var Schema		= mongoose.Schema;
 
 /**
  * Post Schema
  */
-var PostSchema = new mongoose.Schema({
+var PostSchema = new Schema({
+    cover_image: {
+        type: String
+    },
     title: {
         type: String,
         trim: true
-        //validate: [validateLocalStrategyProperty, 'Please fill in your name']
     },
 	body: {
 		type: String,
 		trim: true
 	},
+    likes: {
+        type: Number
+    },
+    //category: {
+    //    type: Schema.Types.ObjectId,
+    //    ref: 'Category'
+    //},
+    tags: [{
+        type: String
+    }],
+    //comments: [{
+    //    type: Schema.Types.ObjectId,
+    //    ref: 'Comment'
+    //}],
+    author: {
+        type: Schema.Types.ObjectId,
+        ref: 'User'
+    },
     updated: {
         type: Date
     },

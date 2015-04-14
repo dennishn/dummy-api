@@ -17,12 +17,6 @@ config.uploadFilesInMemory = false;
 // Populate the DB with sample data
 config.seedDB = true;
 
-// Token settings
-config.token = {
-    secret: process.env.TOKEN_SECRET || 'ionic-photo-gallery',
-    expiration: process.env.TOKEN_EXPIRATION || 60*60*24 //24 hours
-};
-
 // Server settings
 config.server = {
     host: '0.0.0.0',

@@ -15,7 +15,6 @@ var path           = require('path');
 var morgan         = require('morgan');
 var helmet         = require('helmet');
 var multer         = require('multer');
-var logger         = require('mm-node-logger')(module);
 var express        = require('express');
 var bodyParser     = require('body-parser');
 var methodOverride = require('method-override');
@@ -34,7 +33,7 @@ function initMiddleware(app) {
     app.set('showStackError', true);
 
     // Enable jsonp
-    app.enable('jsonp callback');
+    //app.enable('jsonp callback');
 
     // Environment dependent middleware
     if (config.environment === 'development') {
@@ -145,7 +144,7 @@ function initErrorRoutes(app) {
         if (!err) return next();
 
         // Log it
-        logger.error('Internal error(%d): %s', res.statusCode, err.stack);
+        console.error('Internal error(%d): %s', res.statusCode, err.stack);
 
         // Redirect to error page
         res.sendStatus(500);
@@ -164,11 +163,11 @@ function initErrorRoutes(app) {
  * @method initDB
  * @private
  */
-function initDB() {
-    if(config.seedDB) {
-        require('./seed');
-    }
-}
+//function initDB() {
+//    if(config.seedDB) {
+//        require('./seed');
+//    }
+//}
 /**
  * Initialize the Express application.
  *
@@ -198,7 +197,7 @@ function init() {
     initErrorRoutes(app);
 
     // Initialize DB with sample data
-    initDB();
+    //initDB();
 
     return app;
 }

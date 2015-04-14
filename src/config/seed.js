@@ -10,51 +10,47 @@
 /**
  * Module dependencies.
  */
-var logger   = require('mm-node-logger')(module);
-var mongoose = require('mongoose');
-var User     = require('../user/user.model');
-var Image    = require('../image/image.model');
+var logger      = require('mm-node-logger')(module);
+var mongoose    = require('mongoose');
+var faker       = require('faker');
+var User        = require('../user/user.model');
+var Image       = require('../image/image.model');
 
-var testUserId = mongoose.Types.ObjectId();
+var users       = [];
+var usersCount  = 3;
+var uI          = 0;
+while(uI < usersCount) {
+    var user = {
+        first_name: faker.name.firstName(),
+        last_name: faker.name.lastName(),
+        email: faker.internet.email(),
+        avatar: faker.internet.avatar()
+    };
+    users.push(user);
+    uI++;
+}
 
 User.find({}).remove(function() {
-    User.create({
-            provider: 'local',
-            name: 'Martin Micunda',
-            email: 'martinmicunda@test.com',
-            password: 'test',
-            avatar: 'https://avatars2.githubusercontent.com/u/1643606?v=3'
-        }, {
-            _id: testUserId,
-            provider: 'local',
-            name: 'Test',
-            email: 'test@test.com',
-            password: 'test'
-        }, {
-            provider: 'local',
-            name: 'Admin',
-            email: 'admin@admin.com',
-            password: 'admin'
-        }, function() {
-            logger.info('Finished populating users');
+    User.create(users, function() {
+            console.info('Finished populating users');
         }
     );
 });
 
-Image.find({}).remove(function() {
-    Image.create({
-        fileName : 'Slovakia 1',
-        url : 'http://www.rocketroute.com/wp-content/uploads/Carpathian-mountains-Slovakia-685x458.jpg?125416',
-        user: testUserId
-    }, {
-        fileName : 'Slovakia 2',
-        url : 'http://www.travelslovakia.sk/images/blog/small-group-tours/tatra-mountains-self-guided.jpg?125416',
-        user: testUserId
-    }, {
-        fileName : 'Slovakia 3',
-        url : 'http://www.travelslovakia.sk/images/day-tours/high-tatras.jpg?125416',
-        user: testUserId
-    }, function() {
-        logger.info('Finished populating images');
-    });
-});
+//Image.find({}).remove(function() {
+//    Image.create({
+//        fileName : 'Slovakia 1',
+//        url : 'http://www.rocketroute.com/wp-content/uploads/Carpathian-mountains-Slovakia-685x458.jpg?125416',
+//        user: testUserId
+//    }, {
+//        fileName : 'Slovakia 2',
+//        url : 'http://www.travelslovakia.sk/images/blog/small-group-tours/tatra-mountains-self-guided.jpg?125416',
+//        user: testUserId
+//    }, {
+//        fileName : 'Slovakia 3',
+//        url : 'http://www.travelslovakia.sk/images/day-tours/high-tatras.jpg?125416',
+//        user: testUserId
+//    }, function() {
+//        console.info('Finished populating images');
+//    });
+//});
