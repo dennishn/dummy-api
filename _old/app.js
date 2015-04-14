@@ -7,7 +7,7 @@ var express = require('express');
 var mongoose = require('mongoose');
 var interceptor = require('express-interceptor');
 
-var nodesResponse = require('./wrappers/nodes.response');
+var nodesResponse = require('./wrappers/nodes.response.js');
 var nodesHeaders = require('./wrappers/nodes.headers.js');
 
 /*
