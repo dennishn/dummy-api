@@ -69,6 +69,7 @@ module.exports = function(app) {
 			// Filters
 
 			// "custom query"
+			// Modified range between
 			if(req.query.categories) {
 
 				query = {
@@ -108,7 +109,7 @@ module.exports = function(app) {
 			// "custom" sort + order
 			if(req.query.order) {
 
-				sort = req.query.order;
+				sort = (req.query.order.toLowerCase() === 'title') ? '_normalizedTitle' : req.query.order;
 
 				order = '';
 

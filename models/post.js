@@ -1,5 +1,6 @@
 var mongoose	= require('mongoose');
 var Schema		= mongoose.Schema;
+var utils		= require('../utils');
 
 var Comment		= require('./comment');
 var Category	= require('./category');
@@ -29,12 +30,27 @@ var PostSchema   = new Schema({
 	comments: [{
 		type: Schema.Types.ObjectId,
 		ref: 'Comment'
-	}]
+	}],
+	_slug: {
+		type: String
+	},
+	_normalizedTitle: {
+		type: String
+	}
 });
 
 /*
 	Pre Hook Middlewares
  */
+PostSchema.pre('save', function(next) {
+
+	// When a Post is saved, we fill out the slug and normalized fields automatically
+	this._slug = utils.slugify(this.title);
+	this._normalizedTitle = this.title.toLowerCase();
+
+	next();
+
+});
 PostSchema.pre('remove', function(next) {
 
 	// When a Post is removed, we remove all the associated comments
