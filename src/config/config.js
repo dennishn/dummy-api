@@ -31,17 +31,7 @@ config.server = {
 
 // MongoDB settings
 config.mongodb = {
-    dbURI: "mongodb://127.0.0.1:27017/ionic-photo-gallery",
-    dbOptions: {"user": "", "pass": ""}
-};
-
-// Redis settings
-config.redis = {
-    host: process.env.REDIS_HOST || '127.0.0.1',
-    port: process.env.REDIS_PORT || 6379,
-    options: {
-
-    }
+    dbURI: "mongodb://127.0.0.1:27017/DummyApi"
 };
 
 // Export configuration object

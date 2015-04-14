@@ -11,7 +11,6 @@
  * Module dependencies.
  */
 var image          = require('./image.controller.js');
-var authentication = require('../authentication/authentication.controller.js');
 
 /**
  * Set image routes.
@@ -20,10 +19,10 @@ var authentication = require('../authentication/authentication.controller.js');
  */
 function setImageRoutes(app) {
     app.route('/images')
-        .post(authentication.isAuthenticated, image.create)
-        .get(authentication.isAuthenticated, image.findByUser);
+        .post(image.create)
+        .get(image.findByUser);
 
-    app.route('/images/:id').delete(authentication.isAuthenticated, image.delete);
+    app.route('/images/:id').delete(image.delete);
 
 }
 

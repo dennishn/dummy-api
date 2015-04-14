@@ -11,7 +11,6 @@
  * Module dependencies.
  */
 var user           = require('./user.controller.js');
-var authentication = require('../authentication/authentication.controller.js');
 
 /**
  * Set user routes.
@@ -19,8 +18,8 @@ var authentication = require('../authentication/authentication.controller.js');
  * @param {Object} app The express application
  */
 function setUserRoutes(app) {
-    app.route('/users/:id').get(authentication.isAuthenticated, user.findById);
-    app.route('/users').get(authentication.isAuthenticated, user.findAll);
+    app.route('/users/:id').get(user.findById);
+    app.route('/users').get(user.findAll);
 }
 
 module.exports = setUserRoutes;
