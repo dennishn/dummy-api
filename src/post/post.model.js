@@ -35,9 +35,9 @@ var PostSchema = new Schema({
     //    type: Schema.Types.ObjectId,
     //    ref: 'Category'
     //},
-    tags: [{
-        type: String
-    }],
+    //tags: [{
+    //    type: String
+    //}],
     //comments: [{
     //    type: Schema.Types.ObjectId,
     //    ref: 'Comment'

@@ -163,11 +163,11 @@ function initErrorRoutes(app) {
  * @method initDB
  * @private
  */
-//function initDB() {
-//    if(config.seedDB) {
-//        require('./seed');
-//    }
-//}
+function initDB() {
+    if(config.seedDB) {
+        require('./seed');
+    }
+}
 /**
  * Initialize the Express application.
  *
@@ -197,7 +197,7 @@ function init() {
     initErrorRoutes(app);
 
     // Initialize DB with sample data
-    //initDB();
+    initDB();
 
     return app;
 }

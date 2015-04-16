@@ -22,20 +22,6 @@ mongodb(function startServer() {
 
     // Start up the server on the port specified in the config after we connected to mongodb
     app.listen(config.server.port, function () {
-        var serverBanner = ['',
-            '*************************************' + ' EXPRESS SERVER '.yellow + '********************************************',
-            '*',
-            '* ' + pkg.description ,
-            '* @version ' + pkg.version,
-            '* @author ' + pkg.author.name,
-            '* @copyright ' + new Date().getFullYear() + ' ' + pkg.author.name,
-            '* @license ' + pkg.license.type + ', ' + pkg.license.url,
-            '*',
-            '*' + ' App started on port: '.blue + config.server.port + ' - with environment: '.blue + config.environment.blue,
-            '*',
-            '*************************************************************************************************',
-            ''].join('\n');
-        logger.info(serverBanner);
     });
 });
 
