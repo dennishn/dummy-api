@@ -56,7 +56,7 @@ var nodesInterceptor = interceptor(function(req, res){
 		},
 		/*
 			If the response is an object or array - we transform the response
-			according to the Nodes API specs
+			according to the nodes API specs
 		 */
 		intercept: function(body, send) {
 

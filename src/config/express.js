@@ -175,6 +175,7 @@ function initDB() {
  * @returns {Object} the express application
  */
 function init() {
+
     // Initialize express app
     var app = express();
 

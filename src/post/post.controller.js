@@ -10,8 +10,8 @@
 /**
  * Module dependencies.
  */
-//var logger = require('mm-node-logger')(module);
-var Post   = require('./post.model.js');
+var nodesError      = require('../nodes/error');
+var Post            = require('./post.model.js');
 
 /**
  * Find an post by id.
@@ -33,25 +33,59 @@ function findById(req, res) {
 }
 
 /**
- * List of users.
+ * List of posts.
  *
  * @param {Object} req The request object
  * @param {Object} res The request object
- * @returns {Array} the list of users
+ * @returns {Array} the list of posts
  * @api public
  */
 function findAll(req, res) {
-    Post.find(function(err, users) {
+    Post.find()
+        .populate('author')
+        .exec(function(err, posts) {
+            if (err) {
+                console.error(err.message);
+                return res.status(400).send(err);
+            } else {
+                res.json(posts);
+            }
+        });
+}
+
+function create(req, res) {
+    /*
+        Validate:
+        Must have author (So uhm, 412 precondition failed...)
+     */
+
+    var post = new Post(req.body);
+
+    post.save(function(err, post) {
         if (err) {
-            console.error(err.message);
-            return res.status(400).send(err);
+            var error = nodesError.wrapError(err);
+            console.log(error)
+            return res.status(error.code).send(err);
         } else {
-            res.json(users);
+            res.json(post);
         }
     });
 }
 
+function update(req, res) {
+
+}
+
+function put(req, res) {
+
+}
+
+function remove(req, res) {
+
+}
+
 module.exports = {
     findById: findById,
-    findAll: findAll
+    findAll: findAll,
+    create: create
 };

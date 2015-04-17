@@ -62,7 +62,6 @@ var pI          = 0;
 while(pI < postsCount) {
 
 	var authIDindex = mathUtils.randomBetween(0, 3);
-	console.log('Going with user: ', authIDindex);
 
 	var post = {
 		cover_image: faker.image.imageUrl(),

@@ -1,5 +1,5 @@
 /**
- * User routes.
+ * Post routes.
  *
  * @author    Martin Micunda {@link http://martinmicunda.com}
  * @copyright Copyright (c) 2015, Martin Micunda
@@ -10,16 +10,17 @@
 /**
  * Module dependencies.
  */
-var user           = require('./post.controller.js');
+var post           = require('./post.controller.js');
 
 /**
- * Set user routes.
+ * Set post routes.
  *
  * @param {Object} app The express application
  */
-function setUserRoutes(app) {
-    app.route('/users/:id').get(user.findById);
-    app.route('/users').get(user.findAll);
+function setPostRoutes(app) {
+    app.route('/posts/:id').get(post.findById);
+    app.route('/posts').get(post.findAll);
+    app.route('/posts').post(post.create);
 }
 
-module.exports = setUserRoutes;
+module.exports = setPostRoutes;

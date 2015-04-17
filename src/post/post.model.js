@@ -44,7 +44,8 @@ var PostSchema = new Schema({
     //}],
     author: {
         type: Schema.Types.ObjectId,
-        ref: 'User'
+        ref: 'User',
+        required: 'Author is required'
     },
     updated: {
         type: Date
@@ -87,6 +88,11 @@ PostSchema
  */
 PostSchema.pre('save', function(next) {
     var post = this;
+
+    // Populate likes field if it does not exist
+    if(!post.likes) {
+        post.likes = 0;
+    }
 
     next();
 });
