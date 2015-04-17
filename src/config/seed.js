@@ -52,35 +52,35 @@ User.find({}).remove(function() {
         }
     );
 });
-///*
-// Seed Posts
-// */
-//var posts       = [];
-//var postsCount  = 30;
-//var pI          = 0;
-//// Populate an array of posts to be created
-//while(pI < postsCount) {
-//
-//	var authIDindex = mathUtils.randomBetween(0, 3);
-//	console.log('Going with user: ', authIDindex);
-//
-//	var post = {
-//		cover_image: faker.image.imageUrl(),
-//		title: faker.lorem.sentence(),
-//		body: faker.lorem.sentences(),
-//		likes: mathUtils.randomBetween(0, 100),
-//		author: uIDs[authIDindex]
-//	};
-//	posts.push(post);
-//	pI++;
-//}
-//// Remove any previous posts and seed the DB
-//Post.find({}).remove(function() {
-//	Post.create(posts, function() {
-//			console.info('Finished populating posts');
-//		}
-//	);
-//});
+/*
+ Seed Posts
+ */
+var posts       = [];
+var postsCount  = 30;
+var pI          = 0;
+// Populate an array of posts to be created
+while(pI < postsCount) {
+
+	var authIDindex = mathUtils.randomBetween(0, 3);
+	console.log('Going with user: ', authIDindex);
+
+	var post = {
+		cover_image: faker.image.imageUrl(),
+		title: faker.lorem.sentence(),
+		body: faker.lorem.sentences(),
+		likes: mathUtils.randomBetween(0, 100),
+		author: uIDs[authIDindex]
+	};
+	posts.push(post);
+	pI++;
+}
+// Remove any previous posts and seed the DB
+Post.find({}).remove(function() {
+	Post.create(posts, function() {
+			console.info('Finished populating posts');
+		}
+	);
+});
 
 
 //Image.find({}).remove(function() {
