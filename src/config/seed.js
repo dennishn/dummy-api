@@ -29,7 +29,7 @@ var uI          = 0;
 var uIdI		= 0;
 // Create and store user id's in memory so other seeders can utilize them
 while(uIdI < usersCount) {
-    var id = mongoose.Types.ObjectId;
+    var id = mongoose.Types.ObjectId();
     uIDs.push(id);
 	uIdI++;
 }
