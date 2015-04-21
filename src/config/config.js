@@ -23,6 +23,12 @@ config.server = {
     port: process.env.NODE_PORT || 3000
 };
 
+// API route settings
+config.api = {
+    prepend: 'api',
+    version: 'v1'
+};
+
 // MongoDB settings
 config.mongodb = {
     dbURI: "mongodb://127.0.0.1:27017/DummyApi"

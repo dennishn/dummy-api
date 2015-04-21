@@ -1,5 +1,5 @@
 /**
- * Post controller.
+ * Category controller.
  *
  * @author    Dennis Haulund Nielsen
  * @copyright Copyright (c) 2015, Dennis Haulund Nielsen
@@ -13,104 +13,104 @@
 var nodesError      = require('../nodes/error');
 var modelUtils		= require('../utils/model-utils');
 
-var Post            = require('./post.model.js');
+var Category            = require('./category.model.js');
 
 /**
- * Find a post by id.
+ * Find a category by id.
  *
  * @param {Object} req The request object
  * @param {Object} res The response object
- * @returns {Object} the post corresponding to the specified id
+ * @returns {Object} the category corresponding to the specified id
  * @api public
  */
 function findById(req, res) {
-    return Post.findById(req.params.id, function (err, post) {
+    return Category.findById(req.params.id, function (err, category) {
 		var error;
         if (err) {
 			error = nodesError.wrapError(err);
 			return res.status(error.code).send(err);
         } else {
-			if(!post) {
+			if(!category) {
 				error = nodesError.wrapError({
 					name: 'ResourceNotFound'
 				});
 				return res.status(error.code).send(err);
 			}
-            res.json(post);
+            res.json(category);
         }
     });
 }
 
 /**
- * List of posts.
+ * List of categories.
  *
  * @param {Object} req The request object
  * @param {Object} res The response object
- * @returns {Array} the list of posts
+ * @returns {Array} the list of categories
  * @api public
  */
 function findAll(req, res) {
 	console.log(req.params);
-    Post.find()
+    Category.find()
         .populate('author')
-        .exec(function(err, posts) {
+        .exec(function(err, categories) {
             if (err) {
                 console.error(err.message);
                 return res.status(400).send(err);
             } else {
-                res.json(posts);
+                res.json(categories);
             }
         });
 }
 
 /**
- * Create a post.
+ * Create a category.
  *
  * @param {Object} req The request object
  * @param {Object} res The response object
- * @returns {Object} the created post
+ * @returns {Object} the created category
  * @api public
  */
 function create(req, res) {
 
-    var post = new Post(req.body);
+    var category = new Category(req.body);
 
-    post.save(function(err, post) {
+    category.save(function(err, category) {
         if (err) {
             var error = nodesError.wrapError(err);
             return res.status(error.code).send(err);
         } else {
-            res.json(post);
+            res.json(category);
         }
     });
 }
 
 /**
- * Updates all columns of a post.
+ * Updates all columns of a category.
  *
  * @param {Object} req The request object
  * @param {Object} res The response object
- * @returns {Object} the updated post
+ * @returns {Object} the updated category
  * @api public
  */
 function put(req, res) {
 
-	Post.findById(req.params.id)
-		.exec(function(err, post) {
+	Category.findById(req.params.id)
+		.exec(function(err, category) {
 			if (err) {
 				var error = nodesError.wrapError(err);
 				return res.status(error.code).send(err);
 			} else {
 
-				modelUtils.updateDocument(post, Post, req.body);
+				modelUtils.updateDocument(category, Category, req.body);
 
-				post.save(function(err, post) {
+				category.save(function(err, category) {
 
 					if (err) {
 						var error = nodesError.wrapError(err);
 						return res.status(error.code).send(err);
 					} else {
-						res.json(post);
+						res.json(category);
 					}
 
 				});
@@ -120,11 +120,11 @@ function put(req, res) {
 }
 
 /**
- * Update one or more columns of a post.
+ * Update one or more columns of a category.
  *
  * @param {Object} req The request object
  * @param {Object} res The response object
- * @returns {Object} the updated post
+ * @returns {Object} the updated category
  * @api public
  */
 // Fake Patch, atleast for now. How does PHP validate that the
@@ -132,22 +132,22 @@ function put(req, res) {
 // validate that a patch only contains "some" columns - not all...?
 function patch(req, res) {
 
-	Post.findById(req.params.id)
-		.exec(function(err, post) {
+	Category.findById(req.params.id)
+		.exec(function(err, category) {
 			if (err) {
 				var error = nodesError.wrapError(err);
 				return res.status(error.code).send(err);
 			} else {
 
-				modelUtils.updateDocument(post, Post, req.body);
+				modelUtils.updateDocument(category, Category, req.body);
 
-				post.save(function(err, post) {
+				category.save(function(err, category) {
 
 					if (err) {
 						var error = nodesError.wrapError(err);
 						return res.status(error.code).send(err);
 					} else {
-						res.json(post);
+						res.json(category);
 					}
 
 				});
@@ -157,7 +157,7 @@ function patch(req, res) {
 }
 
 /**
- * Remove a post.
+ * Remove a category.
  *
  * @param {Object} req The request object
  * @param {Object} res The response object
@@ -166,14 +166,14 @@ function patch(req, res) {
  */
 function remove(req, res) {
 
-	Post.findById(req.params.id)
-		.exec(function(err, post) {
+	Category.findById(req.params.id)
+		.exec(function(err, category) {
 			if (err) {
 				var error = nodesError.wrapError(err);
 				return res.status(error.code).send(err);
 			} else {
 
-				post.remove(function(err) {
+				category.remove(function(err) {
 
 					if (err) {
 						var error = nodesError.wrapError(err);
@@ -205,6 +205,5 @@ module.exports = {
     findAll: findAll,
     create: create,
 	put: put,
-	patch: patch,
 	remove: remove
 };

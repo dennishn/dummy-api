@@ -53,6 +53,11 @@ User.find({}).remove(function() {
     );
 });
 /*
+ Seed Categories
+ */
+var categories	= ['Technology', 'Politics', 'Culture', 'Sport', 'Finance'];
+var cI			= 0;
+/*
  Seed Posts
  */
 var posts       = [];

@@ -19,9 +19,22 @@
  *
  */
 function wrapError(err) {
+	console.log(err.name, 'Error Wrapper')
 	switch(err.name) {
 		case 'ValidationError':
 			err.code = 412;
+			break;
+		case 'CastError':
+			err.code = 400;
+			err.message = 'Invalid ID provided';
+			break;
+		case 'ResourceNotFound':
+			err.code = 445;
+			err.message = 'Resource not found';
+			break;
+		case 'MissingAccept':
+			err.code = 440;
+			err.message = 'Missing Accept Header';
 			break;
 		default:
 			err.code = 400;

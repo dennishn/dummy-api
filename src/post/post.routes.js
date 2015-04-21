@@ -10,7 +10,8 @@
 /**
  * Module dependencies.
  */
-var post           = require('./post.controller.js');
+var routeUtils	= require('../utils/route-utils');
+var post		= require('./post.controller.js');
 
 /**
  * Set post routes.
@@ -18,9 +19,21 @@ var post           = require('./post.controller.js');
  * @param {Object} app The express application
  */
 function setPostRoutes(app) {
-    app.route('/posts/:id').get(post.findById);
-    app.route('/posts').get(post.findAll);
-    app.route('/posts').post(post.create);
+
+    /*
+        I have not yet found a way to prepend URI's to routes,
+        so this is the closest we get by still providing a level of
+        configuration
+     */
+	var postsRoute = routeUtils.prependRoute('/posts');
+
+    app.route(postsRoute + '/:id').get(post.findById);
+    app.route(postsRoute + '/:id').put(post.put);
+    app.route(postsRoute + '/:id').patch(post.patch);
+    app.route(postsRoute + '/:id').delete(post.remove);
+
+    app.route(postsRoute).get(post.findAll);
+    app.route(postsRoute).post(post.create);
 }
 
 module.exports = setPostRoutes;

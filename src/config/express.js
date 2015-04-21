@@ -21,6 +21,8 @@ var methodOverride = require('method-override');
 var pathUtils      = require('../utils/path-utils');
 var config         = require('./config');
 
+var nodesError     = require('../nodes/error');
+
 /**
  * Initialize application middleware.
  *
@@ -33,7 +35,7 @@ function initMiddleware(app) {
     app.set('showStackError', true);
 
     // Enable jsonp
-    //app.enable('jsonp callback');
+    app.enable('jsonp callback');
 
     // Environment dependent middleware
     if (config.environment === 'development') {
@@ -52,6 +54,21 @@ function initMiddleware(app) {
     }));
     app.use(bodyParser.json());
     app.use(methodOverride());
+
+    /*
+        Nodes API's requires the Accept Header to be set.
+        Since browsers and postman automatically sets this,
+        i have made this extremely verbose for testing purposes.
+     */
+    app.use('*', function(req, res, next) {
+        if(req.headers['accept'] !== 'application/vnd.nodes.v1+json') {
+            var error = nodesError.wrapError({
+                name: 'MissingAccept'
+            });
+            return res.status(error.code).send(error);
+        }
+        next();
+    });
 
     // Add multipart handling middleware
     app.use(multer({
@@ -140,7 +157,7 @@ function initRoutes(app) {
 function initErrorRoutes(app) {
     // Assume 'not found' in the error msgs is a 404. this is somewhat silly, but valid, you can do whatever you like, set properties, use instanceof etc.
     app.use(function (err, req, res, next) {
-        // If the error object doesn't exists
+        // If the error object doesn't exist
         if (!err) return next();
 
         // Log it
