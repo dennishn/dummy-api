@@ -9,7 +9,6 @@
  * Module dependencies.
  */
 var colors  = require('colors');
-var logger  = require('mm-node-logger')(module);
 var pkg     = require('./package.json');
 var config  = require('./src/config/config');
 var express = require('./src/config/express');

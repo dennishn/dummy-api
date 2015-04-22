@@ -66,7 +66,7 @@ function findAll(req, res) {
 		.populate('category')
         .exec(function(err, posts) {
             if (err) {
-                console.error(err.message);
+                console.error(err);
                 return res.status(400).send(err);
             } else {
                 res.json(posts);
@@ -213,7 +213,7 @@ function _buildQueryObject(field, queryString) {
 	//q[field] = queryString.replace(/ /g,'');
 	q[field] = queryString;
 	console.log(q);
-	return q;
+	return  q;
 }
 
 module.exports = {

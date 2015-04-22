@@ -10,7 +10,6 @@
 /**
  * Module dependencies.
  */
-var logger      = require('mm-node-logger')(module);
 var mongoose    = require('mongoose');
 var faker       = require('faker');
 var mathUtils	= require('../utils/math.utils');
