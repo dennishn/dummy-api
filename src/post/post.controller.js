@@ -50,9 +50,20 @@ function findById(req, res) {
  * @api public
  */
 function findAll(req, res) {
-	console.log(req.params);
+
+	var categoryQuery,
+		authorQuery,
+		tagQuery;
+
+	// Query Parameters
+	if(req.query.categories) {
+		categoryQuery = _buildQueryObject('category', req.query.categories);
+	}
+
     Post.find()
+		.or(categoryQuery)
         .populate('author')
+		.populate('category')
         .exec(function(err, posts) {
             if (err) {
                 console.error(err.message);
@@ -192,12 +203,17 @@ function remove(req, res) {
 /*
 	Private Methods
  */
-function _buildQueryObject(queryParam) {
+function _buildQueryObject(field, queryString) {
 
-	return {
+	var queries = queryString.replace(/ /g,'').split(',');
 
-	}
+	console.log(queries, queryString)
 
+	var q = {};
+	//q[field] = queryString.replace(/ /g,'');
+	q[field] = queryString;
+	console.log(q);
+	return q;
 }
 
 module.exports = {

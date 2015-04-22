@@ -17,10 +17,8 @@ var Schema		= mongoose.Schema;
  * Category Schema
  */
 var CategorySchema = new Schema({
-    name: {
-        type: String,
-        required: true,
-        unique: true
+    _id: {
+        type: String
     },
     updated: {
         type: Date

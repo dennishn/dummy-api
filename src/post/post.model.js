@@ -31,10 +31,10 @@ var PostSchema = new Schema({
     likes: {
         type: Number
     },
-    //category: {
-    //    type: Schema.Types.ObjectId,
-    //    ref: 'Category'
-    //},
+    category: {
+        type: String,
+        ref: 'Category'
+    },
     //tags: [{
     //    type: String
     //}],

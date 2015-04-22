@@ -1,6 +1,8 @@
 - Simple Query Params (Filters, Sorting, Limit)
 - Pagination
 - Actions (Methods exposed through API (Aka. Like a post))
+- Modified field on put/patch
+- Wrap Response
 
 try
 q:
