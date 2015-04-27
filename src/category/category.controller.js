@@ -1,5 +1,5 @@
 /**
- * Tag controller.
+ * Category controller.
  *
  * @author    Dennis Haulund Nielsen
  * @copyright Copyright (c) 2015, Dennis Haulund Nielsen
@@ -13,54 +13,54 @@
 var nodesError      = require('../nodes/error');
 var modelUtils		= require('../utils/model-utils');
 
-var Tag            = require('./category.model.js');
+var Category             = require('./category.model.js');
 
 /**
- * List of tags.
+ * List of categorys.
  *
  * @param {Object} req The request object
  * @param {Object} res The response object
- * @returns {Array} the list of tags
+ * @returns {Array} the list of categorys
  * @api public
  */
 function findAll(req, res) {
 	console.log(req.params);
-    Tag.find()
+    Category.find()
         .populate('author')
-        .exec(function(err, tags) {
+        .exec(function(err, categorys) {
             if (err) {
                 console.error(err.message);
                 return res.status(400).send(err);
             } else {
-                res.json(tags);
+                res.json(categorys);
             }
         });
 }
 
 /**
- * Create a tag.
+ * Create a category.
  *
  * @param {Object} req The request object
  * @param {Object} res The response object
- * @returns {Object} the created tag
+ * @returns {Object} the created category
  * @api public
  */
 function create(req, res) {
 
-    var tag = new Tag({_id: req.body.name});
+    var category = new Category({_id: req.body.name});
 
-    tag.save(function(err, tag) {
+    category.save(function(err, category) {
         if (err) {
             var error = nodesError.wrapError(err);
             return res.status(error.code).send(err);
         } else {
-            res.json(tag);
+            res.json(category);
         }
     });
 }
 
 /**
- * Remove a tag.
+ * Remove a category.
  *
  * @param {Object} req The request object
  * @param {Object} res The response object
@@ -69,14 +69,14 @@ function create(req, res) {
  */
 function remove(req, res) {
 
-	Tag.findById(req.params.id)
-		.exec(function(err, tag) {
+	Category.findById(req.params.id)
+		.exec(function(err, category) {
 			if (err) {
 				var error = nodesError.wrapError(err);
 				return res.status(error.code).send(err);
 			} else {
 
-				tag.remove(function(err) {
+				category.remove(function(err) {
 
 					if (err) {
 						var error = nodesError.wrapError(err);
