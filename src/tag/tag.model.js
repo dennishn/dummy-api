@@ -1,5 +1,5 @@
 /**
- * Category model.
+ * Tag model.
  *
  * @author    Martin Micunda {@link http://martinmicunda.com}
  * @copyright Copyright (c) 2015, Martin Micunda
@@ -14,10 +14,10 @@ var mongoose    = require('mongoose');
 var Schema		= mongoose.Schema;
 
 /**
- * Category Schema
+ * Tag Schema
  */
-var CategorySchema = new Schema({
-    _id: {
+var TagSchema = new Schema({
+    name: {
         type: String
     },
     updated: {
@@ -33,7 +33,7 @@ var CategorySchema = new Schema({
  * Validations
  */
 // Validate empty email
-/* CategorySchema
+/* TagSchema
     .path('email')
     .validate(function(email) {
         // if you are authenticating by any of the oauth strategies, don't validate
@@ -41,14 +41,14 @@ var CategorySchema = new Schema({
         return email.length;
     }, 'Email cannot be blank');
 // Validate email is not taken
-CategorySchema
+TagSchema
     .path('email')
     .validate(function(value, respond) {
         var self = this;
-        this.constructor.findOne({email: value}, function(err, category) {
+        this.constructor.findOne({email: value}, function(err, tag) {
             if(err) throw err;
-            if(category) {
-                if(self.id === category.id) return respond(true);
+            if(tag) {
+                if(self.id === tag.id) return respond(true);
                 return respond(false);
             }
             respond(true);
@@ -57,27 +57,12 @@ CategorySchema
 */
 
 /**
- * Pre-save hook (execute before each category.save() call)
+ * Pre-save hook (execute before each tag.save() call)
  */
-CategorySchema.pre('save', function(next) {
-    var category = this;
+TagSchema.pre('save', function(next) {
+    var tag = this;
 
     next();
 });
 
-/**
- * Transform Response
- */
-CategorySchema.set('toJSON', {
-    virtuals: true,
-    transform: function(doc, ret, options) {
-        var retJSON = {
-            created: ret.created,
-            updated: ret.updated,
-            name: ret._id
-        };
-        return retJSON;
-    }
-});
-
-module.exports = mongoose.model('Category', CategorySchema);
+module.exports = mongoose.model('Tag', TagSchema);

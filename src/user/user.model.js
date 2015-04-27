@@ -57,5 +57,22 @@ UserSchema.pre('save', function(next) {
 
     next();
 });
-
+/**
+ * Transform Response
+ */
+UserSchema.set('toJSON', {
+    virtuals: true,
+    transform: function(doc, ret, options) {
+        var retJSON = {
+            id: ret._id,
+            created: ret.created,
+            updated: ret.updated,
+            first_name: ret.first_name,
+            last_name: ret.last_name,
+            email: ret.email,
+            avatar: ret.avatar
+        };
+        return retJSON;
+    }
+});
 module.exports = mongoose.model('User', UserSchema);

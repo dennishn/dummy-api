@@ -35,9 +35,9 @@ var PostSchema = new Schema({
         type: String,
         ref: 'Category'
     },
-    //tags: [{
-    //    type: String
-    //}],
+    tags: [{
+        type: String
+    }],
     //comments: [{
     //    type: Schema.Types.ObjectId,
     //    ref: 'Comment'
@@ -95,6 +95,28 @@ PostSchema.pre('save', function(next) {
     }
 
     next();
+});
+
+/**
+ * Transform Response
+ */
+PostSchema.set('toJSON', {
+	virtuals: true,
+	transform: function(doc, ret, options) {
+		var retJSON = {
+			created: ret.created,
+			updated: ret.updated,
+			id: ret._id,
+			cover_image: ret.cover_image,
+			title: ret.title,
+			body: ret.body,
+			likes: ret.likes,
+			category: ret.category,
+			tags: ret.tags,
+			author: ret.author
+		};
+		return retJSON;
+	}
 });
 
 module.exports = mongoose.model('Post', PostSchema);

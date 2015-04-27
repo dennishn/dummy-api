@@ -87,9 +87,16 @@ var pI          = 0;
 // Populate an array of posts to be created
 while(pI < postsCount) {
 
-	var authIDindex = mathUtils.randomBetween(0, 3);
+	var authIDindex = mathUtils.randomBetween(0, uIDs.length);
 
 	var catIDindex = mathUtils.randomBetween(0, categories.length);
+
+	var tags = [];
+	var tagsCount = mathUtils.randomBetween(0, 10);
+
+	for(var i = 0; i < tagsCount; i++) {
+		tags.push(faker.hacker.noun());
+	}
 
 	var post = {
 		cover_image: faker.image.imageUrl(),
@@ -97,7 +104,8 @@ while(pI < postsCount) {
 		body: faker.lorem.sentences(),
 		likes: mathUtils.randomBetween(0, 100),
 		author: uIDs[authIDindex],
-		category: categories[catIDindex]
+		category: categories[catIDindex],
+		tags: tags
 	};
 	posts.push(post);
 	pI++;

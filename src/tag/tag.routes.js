@@ -11,7 +11,7 @@
  * Module dependencies.
  */
 var routeUtils	    = require('../utils/route-utils');
-var category		= require('./category.controller.js');
+var category		= require('./tag.controller.js');
 
 /**
  * Set category routes.
@@ -27,6 +27,8 @@ function setCategoryRoutes(app) {
      */
 	var categoriesRoute = routeUtils.prependRoute('/categories');
 
+    app.route(categoriesRoute + '/:id').get(category.findById);
+    app.route(categoriesRoute + '/:id').put(category.put);
     app.route(categoriesRoute + '/:id').delete(category.remove);
 
     app.route(categoriesRoute).get(category.findAll);

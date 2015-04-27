@@ -1,5 +1,5 @@
 /**
- * Category controller.
+ * Tag controller.
  *
  * @author    Dennis Haulund Nielsen
  * @copyright Copyright (c) 2015, Dennis Haulund Nielsen
@@ -13,151 +13,54 @@
 var nodesError      = require('../nodes/error');
 var modelUtils		= require('../utils/model-utils');
 
-var Category            = require('./category.model.js');
+var Tag            = require('./category.model.js');
 
 /**
- * Find a category by id.
+ * List of tags.
  *
  * @param {Object} req The request object
  * @param {Object} res The response object
- * @returns {Object} the category corresponding to the specified id
- * @api public
- */
-function findById(req, res) {
-    return Category.findById(req.params.id, function (err, category) {
-		var error;
-        if (err) {
-			error = nodesError.wrapError(err);
-			return res.status(error.code).send(err);
-        } else {
-			if(!category) {
-				error = nodesError.wrapError({
-					name: 'ResourceNotFound'
-				});
-				return res.status(error.code).send(err);
-			}
-            res.json(category);
-        }
-    });
-}
-
-/**
- * List of categories.
- *
- * @param {Object} req The request object
- * @param {Object} res The response object
- * @returns {Array} the list of categories
+ * @returns {Array} the list of tags
  * @api public
  */
 function findAll(req, res) {
 	console.log(req.params);
-    Category.find()
+    Tag.find()
         .populate('author')
-        .exec(function(err, categories) {
+        .exec(function(err, tags) {
             if (err) {
                 console.error(err.message);
                 return res.status(400).send(err);
             } else {
-                res.json(categories);
+                res.json(tags);
             }
         });
 }
 
 /**
- * Create a category.
+ * Create a tag.
  *
  * @param {Object} req The request object
  * @param {Object} res The response object
- * @returns {Object} the created category
+ * @returns {Object} the created tag
  * @api public
  */
 function create(req, res) {
 
-    var category = new Category(req.body);
+    var tag = new Tag({_id: req.body.name});
 
-    category.save(function(err, category) {
+    tag.save(function(err, tag) {
         if (err) {
             var error = nodesError.wrapError(err);
             return res.status(error.code).send(err);
         } else {
-            res.json(category);
+            res.json(tag);
         }
     });
 }
 
 /**
- * Updates all columns of a category.
- *
- * @param {Object} req The request object
- * @param {Object} res The response object
- * @returns {Object} the updated category
- * @api public
- */
-function put(req, res) {
-
-	Category.findById(req.params.id)
-		.exec(function(err, category) {
-			if (err) {
-				var error = nodesError.wrapError(err);
-				return res.status(error.code).send(err);
-			} else {
-
-				modelUtils.updateDocument(category, Category, req.body);
-
-				category.save(function(err, category) {
-
-					if (err) {
-						var error = nodesError.wrapError(err);
-						return res.status(error.code).send(err);
-					} else {
-						res.json(category);
-					}
-
-				});
-			}
-		});
-
-}
-
-/**
- * Update one or more columns of a category.
- *
- * @param {Object} req The request object
- * @param {Object} res The response object
- * @returns {Object} the updated category
- * @api public
- */
-// Fake Patch, atleast for now. How does PHP validate that the
-// data transferred in a put is a full object? And how do they
-// validate that a patch only contains "some" columns - not all...?
-function patch(req, res) {
-
-	Category.findById(req.params.id)
-		.exec(function(err, category) {
-			if (err) {
-				var error = nodesError.wrapError(err);
-				return res.status(error.code).send(err);
-			} else {
-
-				modelUtils.updateDocument(category, Category, req.body);
-
-				category.save(function(err, category) {
-
-					if (err) {
-						var error = nodesError.wrapError(err);
-						return res.status(error.code).send(err);
-					} else {
-						res.json(category);
-					}
-
-				});
-			}
-		});
-
-}
-
-/**
- * Remove a category.
+ * Remove a tag.
  *
  * @param {Object} req The request object
  * @param {Object} res The response object
@@ -166,14 +69,14 @@ function patch(req, res) {
  */
 function remove(req, res) {
 
-	Category.findById(req.params.id)
-		.exec(function(err, category) {
+	Tag.findById(req.params.id)
+		.exec(function(err, tag) {
 			if (err) {
 				var error = nodesError.wrapError(err);
 				return res.status(error.code).send(err);
 			} else {
 
-				category.remove(function(err) {
+				tag.remove(function(err) {
 
 					if (err) {
 						var error = nodesError.wrapError(err);
@@ -189,21 +92,8 @@ function remove(req, res) {
 
 }
 
-/*
-	Private Methods
- */
-function _buildQueryObject(queryParam) {
-
-	return {
-
-	}
-
-}
-
 module.exports = {
-    findById: findById,
     findAll: findAll,
     create: create,
-	put: put,
 	remove: remove
 };
