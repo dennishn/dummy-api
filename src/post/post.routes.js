@@ -27,6 +27,9 @@ function setPostRoutes(app) {
      */
 	var postsRoute = routeUtils.prependRoute('/posts');
 
+    app.route(postsRoute + '/:id/like').post(post.like);
+    app.route(postsRoute + '/:id/like').delete(post.dislike);
+
     app.route(postsRoute + '/:id').get(post.findById);
     app.route(postsRoute + '/:id').put(post.put);
     app.route(postsRoute + '/:id').patch(post.patch);

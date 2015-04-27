@@ -54,7 +54,9 @@
 				"cffe12b4-7a91-5573-4b22-ac1e3d8fbccc",
 				"e7c170ff-8754-3d2e-02ff-1467ef157ea2",
 				"d1be3aa8-5de4-c01b-076e-7a1eaeefa64a",
-				"777eda7e-7703-3166-3e92-dc536ee020dd"
+				"777eda7e-7703-3166-3e92-dc536ee020dd",
+				"a0b6fe13-8a60-fb26-7465-e67e9e296b07",
+				"898eef80-0ed7-6c46-ae29-2967242c9e4c"
 			],
 			"collection_name": "Dummy Api",
 			"collection_owner": 0,
@@ -93,7 +95,9 @@
 			"description": "Gets a single post",
 			"collectionId": "b954d82c-1de4-6b71-18c7-2d110a1fdfb8",
 			"responses": [],
-			"synced": false
+			"synced": false,
+			"owner": 0,
+			"folder": "35fec07c-ac22-7790-ef3b-0e3e54754c31"
 		},
 		{
 			"id": "0c72c25f-823e-201d-de4b-0f0fcf9a5450",
@@ -174,7 +178,9 @@
 			"description": "Updates one or more fields of a single post",
 			"collectionId": "b954d82c-1de4-6b71-18c7-2d110a1fdfb8",
 			"responses": [],
-			"synced": false
+			"synced": false,
+			"owner": 0,
+			"folder": "35fec07c-ac22-7790-ef3b-0e3e54754c31"
 		},
 		{
 			"id": "7c481d38-0041-e9f8-58a1-5b8cb68a447b",
@@ -199,6 +205,28 @@
 			"synced": false,
 			"owner": 0,
 			"folder": "a15c9164-fd5c-2d87-bfb6-30ba00aad274"
+		},
+		{
+			"id": "898eef80-0ed7-6c46-ae29-2967242c9e4c",
+			"headers": "Accept: application/vnd.nodes.v1+json\n",
+			"url": "http://localhost:3000/api/v1/posts/:id/like",
+			"preRequestScript": "",
+			"pathVariables": {
+				"id": ""
+			},
+			"method": "DELETE",
+			"data": [],
+			"dataMode": "urlencoded",
+			"version": 2,
+			"tests": "",
+			"currentHelper": "normal",
+			"helperAttributes": {},
+			"time": 1430175121531,
+			"name": "Unlike",
+			"description": "Removes a like from a post",
+			"collectionId": "b954d82c-1de4-6b71-18c7-2d110a1fdfb8",
+			"responses": [],
+			"synced": false
 		},
 		{
 			"id": "93f6059b-f34f-277c-2238-0eed41408d9b",
@@ -227,7 +255,7 @@
 		{
 			"id": "974651e0-97de-0bea-4454-575f979e71ed",
 			"headers": "Accept: application/vnd.nodes.v1+json\n",
-			"url": "http://localhost:3000/api/v1/posts?categories",
+			"url": "http://localhost:3000/api/v1/posts",
 			"preRequestScript": "",
 			"pathVariables": {},
 			"method": "GET",
@@ -237,9 +265,31 @@
 			"tests": "",
 			"currentHelper": "normal",
 			"helperAttributes": {},
-			"time": 1429632439903,
+			"time": 1430161435952,
 			"name": "getAll",
 			"description": "Gets a list of all posts",
+			"collectionId": "b954d82c-1de4-6b71-18c7-2d110a1fdfb8",
+			"responses": [],
+			"synced": false
+		},
+		{
+			"id": "a0b6fe13-8a60-fb26-7465-e67e9e296b07",
+			"headers": "Accept: application/vnd.nodes.v1+json\n",
+			"url": "http://localhost:3000/api/v1/posts/:id/like",
+			"preRequestScript": "",
+			"pathVariables": {
+				"id": ""
+			},
+			"method": "POST",
+			"data": [],
+			"dataMode": "urlencoded",
+			"version": 2,
+			"tests": "",
+			"currentHelper": "normal",
+			"helperAttributes": {},
+			"time": 1430175123988,
+			"name": "Like",
+			"description": "Adds a like to a post",
 			"collectionId": "b954d82c-1de4-6b71-18c7-2d110a1fdfb8",
 			"responses": [],
 			"synced": false
@@ -268,8 +318,8 @@
 		},
 		{
 			"id": "cffe12b4-7a91-5573-4b22-ac1e3d8fbccc",
-			"headers": "",
-			"url": "http://localhost:3000/api/posts",
+			"headers": "Accept: application/vnd.nodes.v1+json\n",
+			"url": "http://localhost:3000/api/v1/posts",
 			"preRequestScript": "",
 			"pathVariables": {},
 			"method": "POST",
@@ -285,6 +335,42 @@
 					"value": "A short blog post",
 					"type": "text",
 					"enabled": true
+				},
+				{
+					"key": "author",
+					"value": "",
+					"type": "text",
+					"enabled": true
+				},
+				{
+					"key": "tags[0]",
+					"value": "a",
+					"type": "text",
+					"enabled": true
+				},
+				{
+					"key": "tags[1]",
+					"value": "lot",
+					"type": "text",
+					"enabled": true
+				},
+				{
+					"key": "tags[2",
+					"value": "to",
+					"type": "text",
+					"enabled": true
+				},
+				{
+					"key": "tags[3]",
+					"value": "be send",
+					"type": "text",
+					"enabled": true
+				},
+				{
+					"key": "category",
+					"value": "553e97dff92ed7f4148b86c7",
+					"type": "text",
+					"enabled": true
 				}
 			],
 			"dataMode": "urlencoded",
@@ -292,7 +378,7 @@
 			"tests": "",
 			"currentHelper": "normal",
 			"helperAttributes": {},
-			"time": 1429542940632,
+			"time": 1430165505004,
 			"name": "create",
 			"description": "Creates a new post",
 			"collectionId": "b954d82c-1de4-6b71-18c7-2d110a1fdfb8",
@@ -319,7 +405,9 @@
 			"description": "Removes a single post",
 			"collectionId": "b954d82c-1de4-6b71-18c7-2d110a1fdfb8",
 			"responses": [],
-			"synced": false
+			"synced": false,
+			"owner": 0,
+			"folder": "35fec07c-ac22-7790-ef3b-0e3e54754c31"
 		},
 		{
 			"id": "e41cafca-038d-44f3-1364-bff01e754914",
@@ -414,7 +502,9 @@
 			"description": "Updates all fields of a single post",
 			"collectionId": "b954d82c-1de4-6b71-18c7-2d110a1fdfb8",
 			"responses": [],
-			"synced": false
+			"synced": false,
+			"owner": 0,
+			"folder": "35fec07c-ac22-7790-ef3b-0e3e54754c31"
 		},
 		{
 			"id": "f14de068-1f12-8379-9c8a-2377f2330dab",

@@ -17,7 +17,7 @@ var Schema		= mongoose.Schema;
  * Category Schema
  */
 var CategorySchema = new Schema({
-    _id: {
+    name: {
         type: String
     },
     updated: {
@@ -74,7 +74,8 @@ CategorySchema.set('toJSON', {
         var retJSON = {
             created: ret.created,
             updated: ret.updated,
-            name: ret._id
+            id: ret._id,
+            name: ret.name
         };
         return retJSON;
     }

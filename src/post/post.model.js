@@ -13,6 +13,8 @@
 var mongoose    = require('mongoose');
 var Schema		= mongoose.Schema;
 
+var modelUtils  = require('../utils/model-utils');
+
 /**
  * Post Schema
  */
@@ -29,19 +31,16 @@ var PostSchema = new Schema({
 		trim: true
 	},
     likes: {
-        type: Number
+        type: Number,
+        default: 0
     },
     category: {
-        type: String,
+        type: mongoose.Schema.Types.ObjectId,
         ref: 'Category'
     },
     tags: [{
         type: String
     }],
-    //comments: [{
-    //    type: Schema.Types.ObjectId,
-    //    ref: 'Comment'
-    //}],
     author: {
         type: Schema.Types.ObjectId,
         ref: 'User',
@@ -89,13 +88,12 @@ PostSchema
 PostSchema.pre('save', function(next) {
     var post = this;
 
-    // Populate likes field if it does not exist
-    if(!post.likes) {
-        post.likes = 0;
-    }
-
     next();
 });
+
+PostSchema.methods.like = function (cb) {
+    return this.model('Animal').find({ type: this.type }, cb);
+};
 
 /**
  * Transform Response

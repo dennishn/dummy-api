@@ -13,8 +13,11 @@
 var nodesError      = require('../nodes/error');
 var mongoose		= require('mongoose');
 var modelUtils		= require('../utils/model-utils');
+var paginator		= require('../nodes/pagination-pages');
 
 var Post            = require('./post.model.js');
+var User			= require('../user/user.model.js');
+var Category		= require('../category/category.model.js');
 
 /**
  * Find a post by id.
@@ -55,27 +58,21 @@ function findById(req, res) {
  */
 function findAll(req, res) {
 
-	Post.find()
-		.populate('author')
-		.populate('category')
-		.exec(function(err, posts) {
-			if (err) {
-				console.error(err);
-				return res.status(400).send(err);
-			} else {
-				res.json(posts);
-			}
-		});
+	var query = Post.find().populate('author').populate('category');
 
-
-	function _isEmptyObject(obj) {
-		for(var prop in obj) {
-			if (Object.prototype.hasOwnProperty.call(obj, prop)) {
-				return false;
-			}
+	query.paginate({
+		perPage: 10,
+		delta: 3,
+		page: req.query.page || 1
+	}, function(err, posts) {
+		if (err) {
+			console.error(err);
+			return res.status(400).send(err);
+		} else {
+			res.json(posts);
 		}
-		return true;
-	}
+	});
+
 }
 
 /**
@@ -89,6 +86,16 @@ function findAll(req, res) {
 function create(req, res) {
 
     var post = new Post(req.body);
+
+	// Make sure the user exists, and update post.author accordingly.
+	User.findById(post.author).exec(function(user) {
+		post.author = user;
+	});
+
+	// Make sure the category exists, and update post.category accordingly.
+	Category.findById(post.category).exec(function(category) {
+		post.category = category;
+	});
 
     post.save(function(err, post) {
         if (err) {
@@ -203,11 +210,67 @@ function remove(req, res) {
 		});
 
 }
+
+function like(req, res) {
+
+	Post.findById(req.params.id)
+		.exec(function(err, post) {
+			if (err) {
+				var error = nodesError.wrapError(err);
+				return res.status(error.code).send(err);
+			} else {
+
+				post.likes++;
+
+				post.save(function(err, post) {
+
+					if (err) {
+						var error = nodesError.wrapError(err);
+						return res.status(error.code).send(err);
+					} else {
+						res.json(post);
+					}
+
+				});
+			}
+		});
+
+}
+function dislike(req, res) {
+
+	Post.findById(req.params.id)
+		.exec(function(err, post) {
+			if (err) {
+				var error = nodesError.wrapError(err);
+				return res.status(error.code).send(err);
+			} else {
+
+				if(post.likes > 0) {
+					post.likes--;
+				}
+
+				post.save(function(err, post) {
+
+					if (err) {
+						var error = nodesError.wrapError(err);
+						return res.status(error.code).send(err);
+					} else {
+						res.json(post);
+					}
+
+				});
+			}
+		});
+
+}
+
 module.exports = {
     findById: findById,
     findAll: findAll,
     create: create,
 	put: put,
 	patch: patch,
-	remove: remove
+	remove: remove,
+	like: like,
+	dislike: dislike
 };

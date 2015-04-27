@@ -62,10 +62,17 @@ var categories	= ['Technology', 'Politics', 'Culture', 'Sport', 'Finance'];
 
 var catArr		= [];
 var cI			= 0;
+
+//while(cIdI < categories.length) {
+//	id = mongoose.Types.ObjectId();
+//	cIDs.push(id);
+//	cIdI++;
+//}
 while(cI < categories.length) {
 
 	var category = {
-		_id: categories[cI]
+		_id: id = mongoose.Types.ObjectId(),
+		name: categories[cI]
 	};
 
 	catArr.push(category);
@@ -98,13 +105,14 @@ while(pI < postsCount) {
 		tags.push(faker.hacker.noun());
 	}
 
+
 	var post = {
 		cover_image: faker.image.imageUrl(),
 		title: faker.lorem.sentence(),
 		body: faker.lorem.sentences(),
 		likes: mathUtils.randomBetween(0, 100),
 		author: uIDs[authIDindex],
-		category: categories[catIDindex],
+		category: mongoose.Types.ObjectId(catArr[catIDindex]._id),
 		tags: tags
 	};
 	posts.push(post);
@@ -113,6 +121,7 @@ while(pI < postsCount) {
 // Remove any previous posts and seed the DB
 Post.find({}).remove(function() {
 	Post.create(posts, function(err, posts) {
+			console.log(err);
 			console.info('Finished populating posts');
 		}
 	);

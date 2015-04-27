@@ -1,10 +1,8 @@
-- Category Virtual Field
-- Strip Mongoose private fields
-- Pagination
-- Actions (Methods exposed through API (Aka. "Like" a post))
 - Modified field on put/patch
-- Wrap Response
+- Wrap Responses
+- CRUD User / Category
 - Query parameters
+- Fileupload (User avatar, Post cover)
 
 Query Params:
 filters 	= category,author,tags ("where X == Y OR/AND where Z == Q")
@@ -14,11 +12,11 @@ limit		= ("max results returned")
 pagination
 2 typer
 
-page change
+page change (pagination-pages.js)
 	page
 	perPage
 
-infinite scroll ("load more")
+infinite scroll ("load more") (pagination-infinite.js)
 	lastId
 		
 			
