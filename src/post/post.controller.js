@@ -17,6 +17,7 @@ var modelUtils		= require('../utils/model-utils');
 var nodesError      = require('../nodes/error');
 var responseWrapper	= require('../nodes/response-wrapper');
 var paginator		= require('../nodes/pagination-pages');
+var loadmore		= require('../nodes/pagination-loadmore');
 
 var Post            = require('./post.model.js');
 var User			= require('../user/user.model.js');
@@ -66,7 +67,24 @@ function findAll(req, res) {
 
 	var query = Post.find().populate('author').populate('category');
 
-	query.paginate({
+	if(req.query.hasOwnProperty('lastId')) {
+		query.loadmore({
+			lastId: req.query.lastId || null,
+			limit: req.query.limit || 10
+		}, function(err, posts) {
+			console.log('callback')
+			if (err) {
+				console.error(err);
+				return res.status(400).send(err);
+			} else {
+				// This data is wrapped in the paginator module
+				return res.json(posts);
+			}
+		});
+	}
+console.log('du må ikke være her');
+
+	/*query.paginate({
 		perPage: req.query.limit || 10,
 		delta: req.query.delta || 3,
 		page: req.query.page || 1
@@ -76,9 +94,9 @@ function findAll(req, res) {
 			return res.status(400).send(err);
 		} else {
 			// This data is wrapped in the paginator module
-			res.json(posts);
+			return res.json(posts);
 		}
-	});
+	});*/
 
 }
 

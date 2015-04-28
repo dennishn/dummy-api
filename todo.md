@@ -1,4 +1,4 @@
-- Infinite Scroll "last id"
+- Infinite Scroll "last id" (split postman gets) (der skal sq noget orderBy igang her)
 - Query parameters
 - Fileupload (User avatar, Post cover)
 - Image API thing (w/h)
