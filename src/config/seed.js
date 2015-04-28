@@ -121,7 +121,6 @@ while(pI < postsCount) {
 // Remove any previous posts and seed the DB
 Post.find({}).remove(function() {
 	Post.create(posts, function(err, posts) {
-			console.log(err);
 			console.info('Finished populating posts');
 		}
 	);

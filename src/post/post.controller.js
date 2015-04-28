@@ -10,9 +10,12 @@
 /**
  * Module dependencies.
  */
-var nodesError      = require('../nodes/error');
 var mongoose		= require('mongoose');
+
 var modelUtils		= require('../utils/model-utils');
+
+var nodesError      = require('../nodes/error');
+var responseWrapper	= require('../nodes/response-wrapper');
 var paginator		= require('../nodes/pagination-pages');
 
 var Post            = require('./post.model.js');
@@ -43,7 +46,10 @@ function findById(req, res) {
 					});
 					return res.status(error.code).send(err);
 				}
-				res.json(post);
+
+				var response = responseWrapper.wrapResponse(post);
+
+				res.json(response);
 			}
 		});
 }
@@ -61,14 +67,15 @@ function findAll(req, res) {
 	var query = Post.find().populate('author').populate('category');
 
 	query.paginate({
-		perPage: 10,
-		delta: 3,
+		perPage: req.query.limit || 10,
+		delta: req.query.delta || 3,
 		page: req.query.page || 1
 	}, function(err, posts) {
 		if (err) {
 			console.error(err);
 			return res.status(400).send(err);
 		} else {
+			// This data is wrapped in the paginator module
 			res.json(posts);
 		}
 	});
@@ -102,7 +109,9 @@ function create(req, res) {
             var error = nodesError.wrapError(err);
             return res.status(error.code).send(err);
         } else {
-            res.json(post);
+			var response = responseWrapper.wrapResponse(post);
+
+			res.json(response);
         }
     });
 }
@@ -126,13 +135,17 @@ function put(req, res) {
 
 				modelUtils.updateDocument(post, Post, req.body);
 
+				post.updated = Date.now();
+
 				post.save(function(err, post) {
 
 					if (err) {
 						var error = nodesError.wrapError(err);
 						return res.status(error.code).send(err);
 					} else {
-						res.json(post);
+						var response = responseWrapper.wrapResponse(post);
+
+						res.json(response);
 					}
 
 				});
@@ -163,13 +176,17 @@ function patch(req, res) {
 
 				modelUtils.updateDocument(post, Post, req.body);
 
+				post.updated = Date.now();
+
 				post.save(function(err, post) {
 
 					if (err) {
 						var error = nodesError.wrapError(err);
 						return res.status(error.code).send(err);
 					} else {
-						res.json(post);
+						var response = responseWrapper.wrapResponse(post);
+
+						res.json(response);
 					}
 
 				});
@@ -201,7 +218,11 @@ function remove(req, res) {
 						var error = nodesError.wrapError(err);
 						return res.status(error.code).send(err);
 					} else {
-						res.send('');
+
+						var response = responseWrapper.wrapResponse('');
+
+						res.json(response);
+
 					}
 
 				});
@@ -228,7 +249,9 @@ function like(req, res) {
 						var error = nodesError.wrapError(err);
 						return res.status(error.code).send(err);
 					} else {
-						res.json(post);
+						var response = responseWrapper.wrapResponse(post);
+
+						res.json(response);
 					}
 
 				});
@@ -255,7 +278,9 @@ function dislike(req, res) {
 						var error = nodesError.wrapError(err);
 						return res.status(error.code).send(err);
 					} else {
-						res.json(post);
+						var response = responseWrapper.wrapResponse(post);
+
+						res.json(response);
 					}
 
 				});

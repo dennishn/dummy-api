@@ -17,7 +17,7 @@ var config		= require('../config/config');
  */
 function prependRoute(route) {
 
-	return '/' + config.api.prepend + '/' + config.api.version + route;
+	return '/' + config.api.prepend + route;
 
 }
 exports.prependRoute = prependRoute;

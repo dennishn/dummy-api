@@ -31,7 +31,7 @@ config.api = {
 
 // MongoDB settings
 config.mongodb = {
-    dbURI: "mongodb://127.0.0.1:27017/DummyApi"
+    dbURI: 'mongodb://127.0.0.1:27017/DummyApi'
 };
 
 // Export configuration object
