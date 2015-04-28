@@ -113,7 +113,8 @@ while(pI < postsCount) {
 		likes: mathUtils.randomBetween(0, 100),
 		author: uIDs[authIDindex],
 		category: mongoose.Types.ObjectId(catArr[catIDindex]._id),
-		tags: tags
+		tags: tags,
+		_generatedNumber: pI
 	};
 	posts.push(post);
 	pI++;

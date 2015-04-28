@@ -65,14 +65,30 @@ function findById(req, res) {
  */
 function findAll(req, res) {
 
-	var query = Post.find().populate('author').populate('category');
+	var query = Post.find().populate('author').populate('category').sort(req.query.sort || '_generatedNumber');
 
 	if(req.query.hasOwnProperty('lastId')) {
+		console.log('using loadmore');
 		query.loadmore({
 			lastId: req.query.lastId || null,
-			limit: req.query.limit || 10
+			perPage: req.query.limit || 10
 		}, function(err, posts) {
 			console.log('callback')
+			if (err) {
+				console.error(err);
+				return res.status(400).send(err);
+			} else {
+				// This data is wrapped in the loadmore module
+				res.json(posts);
+			}
+		});
+	} else {
+		console.log('using paginate');
+		query.paginate({
+			perPage: req.query.limit || 10,
+			delta: req.query.delta || 3,
+			page: req.query.page || 1
+		}, function(err, posts) {
 			if (err) {
 				console.error(err);
 				return res.status(400).send(err);
@@ -82,21 +98,6 @@ function findAll(req, res) {
 			}
 		});
 	}
-console.log('du må ikke være her');
-
-	/*query.paginate({
-		perPage: req.query.limit || 10,
-		delta: req.query.delta || 3,
-		page: req.query.page || 1
-	}, function(err, posts) {
-		if (err) {
-			console.error(err);
-			return res.status(400).send(err);
-		} else {
-			// This data is wrapped in the paginator module
-			return res.json(posts);
-		}
-	});*/
 
 }
 

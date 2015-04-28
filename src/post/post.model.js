@@ -52,6 +52,9 @@ var PostSchema = new Schema({
     created: {
         type: Date,
         default: Date.now
+    },
+    _generatedNumber: {
+        type: Number
     }
 });
 
@@ -111,7 +114,8 @@ PostSchema.set('toJSON', {
 			likes: ret.likes,
 			category: ret.category,
 			tags: ret.tags,
-			author: ret.author
+			author: ret.author,
+            idx: ret._generatedNumber
 		};
 		return retJSON;
 	}

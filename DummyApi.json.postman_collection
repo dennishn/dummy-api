@@ -5,16 +5,6 @@
 	"order": [],
 	"folders": [
 		{
-			"id": "92f0f041-2a5a-10c5-1e4d-17b329404005",
-			"name": "Categories",
-			"description": "",
-			"write": true,
-			"order": [],
-			"collection_name": "Dummy Api",
-			"collection_owner": 0,
-			"collection_id": "b954d82c-1de4-6b71-18c7-2d110a1fdfb8"
-		},
-		{
 			"id": "35fec07c-ac22-7790-ef3b-0e3e54754c31",
 			"name": "Posts",
 			"description": "",
@@ -33,20 +23,8 @@
 			"collection_owner": 0,
 			"collection_id": "b954d82c-1de4-6b71-18c7-2d110a1fdfb8",
 			"collection": "b954d82c-1de4-6b71-18c7-2d110a1fdfb8",
-			"owner": 0,
+			"owner": "13799",
 			"collectionId": "b954d82c-1de4-6b71-18c7-2d110a1fdfb8"
-		},
-		{
-			"id": "ba9e8077-f079-8d55-3aae-f1a64978a40b",
-			"name": "Users",
-			"description": "",
-			"write": true,
-			"order": [],
-			"collection_name": "Dummy Api",
-			"collection_owner": 0,
-			"collection_id": "b954d82c-1de4-6b71-18c7-2d110a1fdfb8",
-			"collection": "b954d82c-1de4-6b71-18c7-2d110a1fdfb8",
-			"owner": 0
 		}
 	],
 	"timestamp": 1428503206586,
@@ -54,7 +32,7 @@
 	"owner": 0,
 	"sharedWithTeam": false,
 	"subscribed": false,
-	"remoteLink": "",
+	"remoteLink": "https://www.getpostman.com/collections/700a9ee381509c0fb39b",
 	"public": false,
 	"write": true,
 	"requests": [
@@ -67,37 +45,20 @@
 				"id": ""
 			},
 			"method": "GET",
-			"data": [
-				{
-					"key": "headquarter_id",
-					"value": "89",
-					"type": "text",
-					"enabled": true
-				},
-				{
-					"key": "name",
-					"value": "Danbolig hq lorem",
-					"type": "text",
-					"enabled": true
-				},
-				{
-					"key": "parent_id",
-					"value": "7",
-					"type": "text",
-					"enabled": true
-				}
-			],
+			"data": [],
 			"dataMode": "params",
 			"version": 2,
 			"tests": "",
 			"currentHelper": "normal",
 			"helperAttributes": {},
-			"time": 1430203608610,
+			"time": 1430240674955,
 			"name": "getOne",
 			"description": "Gets a single post",
 			"collectionId": "b954d82c-1de4-6b71-18c7-2d110a1fdfb8",
 			"responses": [],
-			"synced": false
+			"synced": false,
+			"owner": 0,
+			"folder": "35fec07c-ac22-7790-ef3b-0e3e54754c31"
 		},
 		{
 			"id": "777eda7e-7703-3166-3e92-dc536ee020dd",
@@ -114,6 +75,12 @@
 					"value": "My Updated Title",
 					"type": "text",
 					"enabled": true
+				},
+				{
+					"key": "body",
+					"value": "A bit longer blog post yeah!",
+					"type": "text",
+					"enabled": true
 				}
 			],
 			"dataMode": "urlencoded",
@@ -121,12 +88,14 @@
 			"tests": "",
 			"currentHelper": "normal",
 			"helperAttributes": {},
-			"time": 1430203625135,
+			"time": 1430240691189,
 			"name": "patch",
 			"description": "Updates one or more fields of a single post",
 			"collectionId": "b954d82c-1de4-6b71-18c7-2d110a1fdfb8",
 			"responses": [],
-			"synced": false
+			"synced": false,
+			"owner": 0,
+			"folder": "35fec07c-ac22-7790-ef3b-0e3e54754c31"
 		},
 		{
 			"id": "898eef80-0ed7-6c46-ae29-2967242c9e4c",
@@ -143,46 +112,29 @@
 			"tests": "",
 			"currentHelper": "normal",
 			"helperAttributes": {},
-			"time": 1430203640898,
+			"time": 1430240701262,
 			"name": "Unlike",
 			"description": "Removes a like from a post",
 			"collectionId": "b954d82c-1de4-6b71-18c7-2d110a1fdfb8",
 			"responses": [],
-			"synced": false
+			"synced": false,
+			"owner": 0,
+			"folder": "35fec07c-ac22-7790-ef3b-0e3e54754c31"
 		},
 		{
 			"id": "974651e0-97de-0bea-4454-575f979e71ed",
 			"headers": "Accept: application/vnd.nodes.v1+json\n",
-			"url": "http://localhost:3000/api/posts?page&limit&delta",
+			"url": "http://localhost:3000/api/posts",
 			"preRequestScript": "",
 			"pathVariables": {},
 			"method": "GET",
-			"data": [
-				{
-					"key": "headquarter_id",
-					"value": "89",
-					"type": "text",
-					"enabled": true
-				},
-				{
-					"key": "name",
-					"value": "Danbolig hq lorem",
-					"type": "text",
-					"enabled": true
-				},
-				{
-					"key": "parent_id",
-					"value": "7",
-					"type": "text",
-					"enabled": true
-				}
-			],
+			"data": [],
 			"dataMode": "params",
 			"version": 2,
 			"tests": "",
 			"currentHelper": "normal",
 			"helperAttributes": {},
-			"time": 1430203604220,
+			"time": 1430251201005,
 			"name": "getAll",
 			"description": "Gets a list of all posts",
 			"collectionId": "b954d82c-1de4-6b71-18c7-2d110a1fdfb8",
@@ -204,12 +156,14 @@
 			"tests": "",
 			"currentHelper": "normal",
 			"helperAttributes": {},
-			"time": 1430203635891,
+			"time": 1430240697301,
 			"name": "Like",
 			"description": "Adds a like to a post",
 			"collectionId": "b954d82c-1de4-6b71-18c7-2d110a1fdfb8",
 			"responses": [],
-			"synced": false
+			"synced": false,
+			"owner": 0,
+			"folder": "35fec07c-ac22-7790-ef3b-0e3e54754c31"
 		},
 		{
 			"id": "cffe12b4-7a91-5573-4b22-ac1e3d8fbccc",
@@ -263,7 +217,7 @@
 				},
 				{
 					"key": "category",
-					"value": "553f2abf8a5278188056f9c9",
+					"value": "",
 					"type": "text",
 					"enabled": true
 				}
@@ -273,7 +227,7 @@
 			"tests": "",
 			"currentHelper": "normal",
 			"helperAttributes": {},
-			"time": 1430203614675,
+			"time": 1430251946962,
 			"name": "create",
 			"description": "Creates a new post",
 			"collectionId": "b954d82c-1de4-6b71-18c7-2d110a1fdfb8",
@@ -295,12 +249,14 @@
 			"tests": "",
 			"currentHelper": "normal",
 			"helperAttributes": {},
-			"time": 1430203629903,
+			"time": 1430240688230,
 			"name": "delete",
 			"description": "Removes a single post",
 			"collectionId": "b954d82c-1de4-6b71-18c7-2d110a1fdfb8",
 			"responses": [],
-			"synced": false
+			"synced": false,
+			"owner": 0,
+			"folder": "35fec07c-ac22-7790-ef3b-0e3e54754c31"
 		},
 		{
 			"id": "e7c170ff-8754-3d2e-02ff-1467ef157ea2",
@@ -330,12 +286,14 @@
 			"tests": "",
 			"currentHelper": "normal",
 			"helperAttributes": {},
-			"time": 1430203620915,
+			"time": 1430240685050,
 			"name": "update",
 			"description": "Updates all fields of a single post",
 			"collectionId": "b954d82c-1de4-6b71-18c7-2d110a1fdfb8",
 			"responses": [],
-			"synced": false
+			"synced": false,
+			"owner": 0,
+			"folder": "35fec07c-ac22-7790-ef3b-0e3e54754c31"
 		}
 	]
 }
