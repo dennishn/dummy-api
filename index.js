@@ -1,6 +1,6 @@
 /**
- * @author    Martin Micunda {@link http://martinmicunda.com}
- * @copyright Copyright (c) 2015, Martin Micunda
+ * @author    Dennis Haulund Nielsen
+ * @copyright Copyright (c) 2015, Dennis Haulund Nielsen
  * @license	  The MIT License {@link http://opensource.org/licenses/MIT}
  */
 'use strict';
@@ -8,7 +8,6 @@
 /**
  * Module dependencies.
  */
-var colors  = require('colors');
 var pkg     = require('./package.json');
 var config  = require('./src/config/config');
 var express = require('./src/config/express');

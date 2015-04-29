@@ -1,8 +1,8 @@
 /**
  * Post routes.
  *
- * @author    Martin Micunda {@link http://martinmicunda.com}
- * @copyright Copyright (c) 2015, Martin Micunda
+ * @author    Dennis Haulund Nielsen
+ * @copyright Copyright (c) 2015, Dennis Haulund Nielsen
  * @license	  The MIT License {@link http://opensource.org/licenses/MIT}
  */
 'use strict';

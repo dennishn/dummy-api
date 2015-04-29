@@ -9,10 +9,6 @@ Requirements:
 - npm install
 - npm start for "live reload"
 	- node app.js for production
+- Postman collection available
+- Look at config/config.js for possible settings (like seeding the db)
 
-
-Reasonings:
-
-Q: Why are comments treated as embedded documents in a Post model?
-
-A: Because comments are unique to a single post.
