@@ -5,6 +5,21 @@
 	"order": [],
 	"folders": [
 		{
+			"id": "92f0f041-2a5a-10c5-1e4d-17b329404005",
+			"name": "Categories",
+			"description": "",
+			"write": true,
+			"order": [
+				"8f3d5611-c8b6-19e1-dbe6-67f2127baf73",
+				"89fdab39-4e74-9cf3-f7ff-74bfa84c38c6",
+				"40b6cad5-7753-2f77-0ff6-2cc3922e7014"
+			],
+			"collection_name": "Dummy Api",
+			"collection_owner": 0,
+			"collection_id": "b954d82c-1de4-6b71-18c7-2d110a1fdfb8",
+			"owner": "13799"
+		},
+		{
 			"id": "35fec07c-ac22-7790-ef3b-0e3e54754c31",
 			"name": "Posts",
 			"description": "",
@@ -25,6 +40,25 @@
 			"collection": "b954d82c-1de4-6b71-18c7-2d110a1fdfb8",
 			"owner": "13799",
 			"collectionId": "b954d82c-1de4-6b71-18c7-2d110a1fdfb8"
+		},
+		{
+			"id": "2e1f5a89-698e-47ec-8c72-98c5a949dd65",
+			"name": "Users",
+			"description": "",
+			"write": true,
+			"order": [
+				"ab92af76-d7e7-1f87-b168-b35c6a56664c",
+				"55d939d6-7592-80a5-853e-58082818e288",
+				"d9e97442-3c4f-a3ee-94db-053356de08d2",
+				"61ce62db-7702-ca0e-c6c1-64847f66bd7b",
+				"4e22e109-3d5c-c371-f16f-4d76cf20d50f"
+			],
+			"collection_name": "Dummy Api",
+			"collection_owner": 0,
+			"collection_id": "b954d82c-1de4-6b71-18c7-2d110a1fdfb8",
+			"owner": "13799",
+			"collection": "b954d82c-1de4-6b71-18c7-2d110a1fdfb8",
+			"collectionId": "b954d82c-1de4-6b71-18c7-2d110a1fdfb8"
 		}
 	],
 	"timestamp": 1428503206586,
@@ -32,7 +66,7 @@
 	"owner": 0,
 	"sharedWithTeam": false,
 	"subscribed": false,
-	"remoteLink": "https://www.getpostman.com/collections/700a9ee381509c0fb39b",
+	"remoteLink": "",
 	"public": false,
 	"write": true,
 	"requests": [
@@ -45,20 +79,144 @@
 				"id": ""
 			},
 			"method": "GET",
+			"data": [
+				{
+					"key": "headquarter_id",
+					"value": "89",
+					"type": "text",
+					"enabled": true
+				},
+				{
+					"key": "name",
+					"value": "Danbolig hq lorem",
+					"type": "text",
+					"enabled": true
+				},
+				{
+					"key": "parent_id",
+					"value": "7",
+					"type": "text",
+					"enabled": true
+				}
+			],
+			"dataMode": "params",
+			"version": 2,
+			"tests": "",
+			"currentHelper": "normal",
+			"helperAttributes": {},
+			"time": 1430203608610,
+			"name": "getOne",
+			"description": "Gets a single post",
+			"collectionId": "b954d82c-1de4-6b71-18c7-2d110a1fdfb8",
+			"responses": [],
+			"synced": false
+		},
+		{
+			"id": "40b6cad5-7753-2f77-0ff6-2cc3922e7014",
+			"headers": "Accept: application/vnd.nodes.v1+json\n",
+			"url": "http://localhost:3000/api/categories/:id",
+			"preRequestScript": "",
+			"pathVariables": {
+				"id": ""
+			},
+			"method": "DELETE",
+			"data": [],
+			"dataMode": "urlencoded",
+			"version": 2,
+			"tests": "",
+			"currentHelper": "normal",
+			"helperAttributes": {},
+			"time": 1430289660717,
+			"name": "delete",
+			"description": "Removes a single category",
+			"collectionId": "b954d82c-1de4-6b71-18c7-2d110a1fdfb8",
+			"responses": [],
+			"synced": false
+		},
+		{
+			"id": "4e22e109-3d5c-c371-f16f-4d76cf20d50f",
+			"headers": "Accept: application/vnd.nodes.v1+json\n",
+			"url": "http://localhost:3000/api/users/:id",
+			"preRequestScript": "",
+			"pathVariables": {
+				"id": ""
+			},
+			"method": "DELETE",
+			"data": [],
+			"dataMode": "urlencoded",
+			"version": 2,
+			"tests": "",
+			"currentHelper": "normal",
+			"helperAttributes": {},
+			"time": 1430290675035,
+			"name": "delete",
+			"description": "Removes a single category",
+			"collectionId": "b954d82c-1de4-6b71-18c7-2d110a1fdfb8",
+			"responses": [],
+			"synced": false
+		},
+		{
+			"id": "55d939d6-7592-80a5-853e-58082818e288",
+			"headers": "Accept: application/vnd.nodes.v1+json\n",
+			"url": "http://localhost:3000/api/users/:id",
+			"preRequestScript": "",
+			"pathVariables": {
+				"id": ""
+			},
+			"method": "GET",
 			"data": [],
 			"dataMode": "params",
 			"version": 2,
 			"tests": "",
 			"currentHelper": "normal",
 			"helperAttributes": {},
-			"time": 1430240674955,
+			"time": 1430290464607,
 			"name": "getOne",
-			"description": "Gets a single post",
+			"description": "Gets a single user",
 			"collectionId": "b954d82c-1de4-6b71-18c7-2d110a1fdfb8",
 			"responses": [],
-			"synced": false,
-			"owner": 0,
-			"folder": "35fec07c-ac22-7790-ef3b-0e3e54754c31"
+			"synced": false
+		},
+		{
+			"id": "61ce62db-7702-ca0e-c6c1-64847f66bd7b",
+			"headers": "Accept: application/vnd.nodes.v1+json\n",
+			"url": "http://localhost:3000/api/users/:id",
+			"preRequestScript": "",
+			"pathVariables": {
+				"id": ""
+			},
+			"method": "PUT",
+			"data": [
+				{
+					"key": "first_name",
+					"value": "John",
+					"type": "text",
+					"enabled": true
+				},
+				{
+					"key": "last_name",
+					"value": "Doe",
+					"type": "text",
+					"enabled": true
+				},
+				{
+					"key": "email",
+					"value": "john@doe.com",
+					"type": "text",
+					"enabled": true
+				}
+			],
+			"dataMode": "urlencoded",
+			"version": 2,
+			"tests": "",
+			"currentHelper": "normal",
+			"helperAttributes": {},
+			"time": 1430290524895,
+			"name": "update",
+			"description": "Updates all fields of a user",
+			"collectionId": "b954d82c-1de4-6b71-18c7-2d110a1fdfb8",
+			"responses": [],
+			"synced": false
 		},
 		{
 			"id": "777eda7e-7703-3166-3e92-dc536ee020dd",
@@ -75,12 +233,6 @@
 					"value": "My Updated Title",
 					"type": "text",
 					"enabled": true
-				},
-				{
-					"key": "body",
-					"value": "A bit longer blog post yeah!",
-					"type": "text",
-					"enabled": true
 				}
 			],
 			"dataMode": "urlencoded",
@@ -88,14 +240,12 @@
 			"tests": "",
 			"currentHelper": "normal",
 			"helperAttributes": {},
-			"time": 1430240691189,
+			"time": 1430203625135,
 			"name": "patch",
 			"description": "Updates one or more fields of a single post",
 			"collectionId": "b954d82c-1de4-6b71-18c7-2d110a1fdfb8",
 			"responses": [],
-			"synced": false,
-			"owner": 0,
-			"folder": "35fec07c-ac22-7790-ef3b-0e3e54754c31"
+			"synced": false
 		},
 		{
 			"id": "898eef80-0ed7-6c46-ae29-2967242c9e4c",
@@ -112,14 +262,59 @@
 			"tests": "",
 			"currentHelper": "normal",
 			"helperAttributes": {},
-			"time": 1430240701262,
+			"time": 1430203640898,
 			"name": "Unlike",
 			"description": "Removes a like from a post",
 			"collectionId": "b954d82c-1de4-6b71-18c7-2d110a1fdfb8",
 			"responses": [],
-			"synced": false,
-			"owner": 0,
-			"folder": "35fec07c-ac22-7790-ef3b-0e3e54754c31"
+			"synced": false
+		},
+		{
+			"id": "89fdab39-4e74-9cf3-f7ff-74bfa84c38c6",
+			"headers": "Accept: application/vnd.nodes.v1+json\n",
+			"url": "http://localhost:3000/api/categories",
+			"preRequestScript": "",
+			"pathVariables": {},
+			"method": "POST",
+			"data": [
+				{
+					"key": "name",
+					"value": "My Category",
+					"type": "text",
+					"enabled": true
+				}
+			],
+			"dataMode": "urlencoded",
+			"version": 2,
+			"tests": "",
+			"currentHelper": "normal",
+			"helperAttributes": {},
+			"time": 1430289558243,
+			"name": "create",
+			"description": "Creates a new category",
+			"collectionId": "b954d82c-1de4-6b71-18c7-2d110a1fdfb8",
+			"responses": [],
+			"synced": false
+		},
+		{
+			"id": "8f3d5611-c8b6-19e1-dbe6-67f2127baf73",
+			"headers": "Accept: application/vnd.nodes.v1+json\n",
+			"url": "http://localhost:3000/api/categories",
+			"preRequestScript": "",
+			"pathVariables": {},
+			"method": "GET",
+			"data": [],
+			"dataMode": "params",
+			"version": 2,
+			"tests": "",
+			"currentHelper": "normal",
+			"helperAttributes": {},
+			"time": 1430289356289,
+			"name": "getAll",
+			"description": "## Gets a list of all categories\n\n### Pagination parameters\n- page\n- limit\n- delta\n\n### Load More parameters\n- lastId\n- limit\n",
+			"collectionId": "b954d82c-1de4-6b71-18c7-2d110a1fdfb8",
+			"responses": [],
+			"synced": false
 		},
 		{
 			"id": "974651e0-97de-0bea-4454-575f979e71ed",
@@ -134,9 +329,9 @@
 			"tests": "",
 			"currentHelper": "normal",
 			"helperAttributes": {},
-			"time": 1430251201005,
+			"time": 1430289015921,
 			"name": "getAll",
-			"description": "Gets a list of all posts",
+			"description": "## Gets a list of all posts\n\n### Pagination parameters\n- page\n- limit\n- delta\n\n### Load More parameters\n- lastId\n- limit\n",
 			"collectionId": "b954d82c-1de4-6b71-18c7-2d110a1fdfb8",
 			"responses": [],
 			"synced": false
@@ -156,14 +351,32 @@
 			"tests": "",
 			"currentHelper": "normal",
 			"helperAttributes": {},
-			"time": 1430240697301,
+			"time": 1430203635891,
 			"name": "Like",
 			"description": "Adds a like to a post",
 			"collectionId": "b954d82c-1de4-6b71-18c7-2d110a1fdfb8",
 			"responses": [],
-			"synced": false,
-			"owner": 0,
-			"folder": "35fec07c-ac22-7790-ef3b-0e3e54754c31"
+			"synced": false
+		},
+		{
+			"id": "ab92af76-d7e7-1f87-b168-b35c6a56664c",
+			"headers": "Accept: application/vnd.nodes.v1+json\n",
+			"url": "http://localhost:3000/api/users",
+			"preRequestScript": "",
+			"pathVariables": {},
+			"method": "GET",
+			"data": [],
+			"dataMode": "params",
+			"version": 2,
+			"tests": "",
+			"currentHelper": "normal",
+			"helperAttributes": {},
+			"time": 1430290088829,
+			"name": "getAll",
+			"description": "## Gets a list of all users\n\n### Pagination parameters\n- page\n- limit\n- delta\n\n### Load More parameters\n- lastId\n- limit\n",
+			"collectionId": "b954d82c-1de4-6b71-18c7-2d110a1fdfb8",
+			"responses": [],
+			"synced": false
 		},
 		{
 			"id": "cffe12b4-7a91-5573-4b22-ac1e3d8fbccc",
@@ -217,7 +430,7 @@
 				},
 				{
 					"key": "category",
-					"value": "",
+					"value": "553f2abf8a5278188056f9c9",
 					"type": "text",
 					"enabled": true
 				}
@@ -227,7 +440,7 @@
 			"tests": "",
 			"currentHelper": "normal",
 			"helperAttributes": {},
-			"time": 1430251946962,
+			"time": 1430203614675,
 			"name": "create",
 			"description": "Creates a new post",
 			"collectionId": "b954d82c-1de4-6b71-18c7-2d110a1fdfb8",
@@ -249,14 +462,51 @@
 			"tests": "",
 			"currentHelper": "normal",
 			"helperAttributes": {},
-			"time": 1430240688230,
+			"time": 1430203629903,
 			"name": "delete",
 			"description": "Removes a single post",
 			"collectionId": "b954d82c-1de4-6b71-18c7-2d110a1fdfb8",
 			"responses": [],
-			"synced": false,
-			"owner": 0,
-			"folder": "35fec07c-ac22-7790-ef3b-0e3e54754c31"
+			"synced": false
+		},
+		{
+			"id": "d9e97442-3c4f-a3ee-94db-053356de08d2",
+			"headers": "Accept: application/vnd.nodes.v1+json\n",
+			"url": "http://localhost:3000/api/users",
+			"preRequestScript": "",
+			"pathVariables": {},
+			"method": "POST",
+			"data": [
+				{
+					"key": "first_name",
+					"value": "John",
+					"type": "text",
+					"enabled": true
+				},
+				{
+					"key": "last_name",
+					"value": "Doe",
+					"type": "text",
+					"enabled": true
+				},
+				{
+					"key": "email",
+					"value": "john@doe.com",
+					"type": "text",
+					"enabled": true
+				}
+			],
+			"dataMode": "urlencoded",
+			"version": 2,
+			"tests": "",
+			"currentHelper": "normal",
+			"helperAttributes": {},
+			"time": 1430290298876,
+			"name": "create",
+			"description": "Creates a new user",
+			"collectionId": "b954d82c-1de4-6b71-18c7-2d110a1fdfb8",
+			"responses": [],
+			"synced": false
 		},
 		{
 			"id": "e7c170ff-8754-3d2e-02ff-1467ef157ea2",
@@ -286,14 +536,12 @@
 			"tests": "",
 			"currentHelper": "normal",
 			"helperAttributes": {},
-			"time": 1430240685050,
+			"time": 1430203620915,
 			"name": "update",
 			"description": "Updates all fields of a single post",
 			"collectionId": "b954d82c-1de4-6b71-18c7-2d110a1fdfb8",
 			"responses": [],
-			"synced": false,
-			"owner": 0,
-			"folder": "35fec07c-ac22-7790-ef3b-0e3e54754c31"
+			"synced": false
 		}
 	]
 }

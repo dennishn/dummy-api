@@ -10,8 +10,14 @@
 /**
  * Module dependencies.
  */
-var nodesError      = require('../nodes/error');
+var mongoose		= require('mongoose');
+
 var modelUtils		= require('../utils/model-utils');
+
+var nodesError      = require('../nodes/error');
+var responseWrapper	= require('../nodes/response-wrapper');
+var paginator		= require('../nodes/pagination-pages');
+var loadmore		= require('../nodes/pagination-loadmore');
 
 var Category             = require('./category.model.js');
 
@@ -20,21 +26,44 @@ var Category             = require('./category.model.js');
  *
  * @param {Object} req The request object
  * @param {Object} res The response object
- * @returns {Array} the list of categorys
+ * @returns {Array} the list of categories
  * @api public
  */
 function findAll(req, res) {
-	console.log(req.params);
-    Category.find()
-        .populate('author')
-        .exec(function(err, categorys) {
+
+    var query = Category.find().sort(req.query.sort || '-created');
+
+    if(req.query.hasOwnProperty('lastId')) {
+        console.log('using loadmore');
+        query.loadmore({
+            lastId: req.query.lastId || null,
+            perPage: req.query.limit || 10
+        }, function(err, categories) {
             if (err) {
-                console.error(err.message);
+                console.error(err);
                 return res.status(400).send(err);
             } else {
-                res.json(categorys);
+                // This data is wrapped in the loadmore module
+                res.json(categories);
             }
         });
+    } else {
+        console.log('using paginate');
+        query.paginate({
+            perPage: req.query.limit || 10,
+            delta: req.query.delta || 3,
+            page: req.query.page || 1
+        }, function(err, categories) {
+            if (err) {
+                console.error(err);
+                return res.status(400).send(err);
+            } else {
+                // This data is wrapped in the paginator module
+                return res.json(categories);
+            }
+        });
+    }
+
 }
 
 /**
@@ -47,14 +76,16 @@ function findAll(req, res) {
  */
 function create(req, res) {
 
-    var category = new Category({_id: req.body.name});
+    var category = new Category(req.body);
 
     category.save(function(err, category) {
         if (err) {
             var error = nodesError.wrapError(err);
             return res.status(error.code).send(err);
         } else {
-            res.json(category);
+			var response = responseWrapper.wrapResponse(category);
+
+			res.json(response);
         }
     });
 }
@@ -82,7 +113,9 @@ function remove(req, res) {
 						var error = nodesError.wrapError(err);
 						return res.status(error.code).send(err);
 					} else {
-						res.send('');
+						var response = responseWrapper.wrapResponse('');
+
+						res.json(response);
 					}
 
 				});

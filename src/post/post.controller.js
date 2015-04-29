@@ -73,7 +73,6 @@ function findAll(req, res) {
 			lastId: req.query.lastId || null,
 			perPage: req.query.limit || 10
 		}, function(err, posts) {
-			console.log('callback')
 			if (err) {
 				console.error(err);
 				return res.status(400).send(err);

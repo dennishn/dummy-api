@@ -1,26 +1,21 @@
-- Infinite Scroll "last id" (split postman gets) (der skal sq noget orderBy igang her)
+- CRUD User / Category (incl methods, transformers and whatnot from post)
+- Tags as its own schema?
+- Udate all of postman (inc multiple gets, sub folders?)
+
+Secondary features:
 - Query parameters
 - Fileupload (User avatar, Post cover)
 - Image API thing (w/h)
 - Human error responses?
-- CRUD User / Category (incl methods, transformers and whatnot from post)
-- Tags as its own schema?
+- Authentication (simple, email based)
+- Authentication (advanced, oAuth based)
+- User Management (merge email based account with oAuth account, reset pw)
+
 
 Query Params:
 filters 	= category,author,tags ("where X == Y OR/AND where Z == Q")
-sort		= category,author,likes ("order by X")
-limit		= ("max results returned")
-
-pagination
-2 typer
-
-page change (pagination-pages.js)
-	page
-	perPage
-
-infinite scroll ("load more") (pagination-infinite.js)
-	lastId
-		
+done	limit		= ("max results returned")
+done	sort		= category,author,likes ("order by X")
 			
 Spørgsmål til DJ Api drengene
 

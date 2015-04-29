@@ -4,7 +4,8 @@
  * adapted from mongoose-paginate and modified for Nodes API standards
  */
 'use strict';
-var Query = require('mongoose').Query;
+var mongoose	= require('mongoose');
+var Query 		= mongoose.Query;
 
 /**
  * loadmore
@@ -30,8 +31,7 @@ Query.prototype.loadmore = function(options, callback) {
 	var query = this;
 	var model = query.model;
 
-	// Valider mod mongoose type
-	if(options.lastId) {
+	if(mongoose.Types.ObjectId.isValid(options.lastId)) {
 		query.where({_id: {$gt: options.lastId}});
 	}
 
